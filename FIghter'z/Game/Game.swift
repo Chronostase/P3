@@ -9,5 +9,11 @@
 import Foundation
 
 class Game {
+    var myTeam: [Character]
+    var opponentTeam: [Character]
     
+    init(myTeam: [Character], opponentTeam: [Character]) {
+        self.myTeam = myTeam
+        self.opponentTeam = opponentTeam
+    }
 }

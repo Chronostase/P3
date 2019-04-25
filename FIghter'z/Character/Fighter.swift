@@ -9,5 +9,8 @@
 import Foundation
 
 class Fighter: Character {
-    
+    init() {
+        let sword = Sword(name: "Needle", damage: 10)
+        super.init(name: "FooFighter", life: 100, attack: 3, sword: sword)
+    }
 }
