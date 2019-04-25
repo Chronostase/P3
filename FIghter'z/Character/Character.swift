@@ -1,5 +1,5 @@
 //
-//  main.swift
+//  Character.swift
 //  FIghter'z
 //
 //  Created by Thomas on 25/04/2019.
@@ -8,5 +8,6 @@
 
 import Foundation
 
-print("Hello, World!")
-
+class Character {
+    
+}
