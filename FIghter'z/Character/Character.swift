@@ -8,22 +8,25 @@
 
 import Foundation
 
-class Character {
-    var name: String
+class Character { // class to create characters
+    
+    //---------------------------//
+    //Mark Properties
+    //---------------------------//
+    
+    var name: [String] = []
     var life: Int
     var attack: Int
     var sword: Sword?
     var totalDamage: Int {
-        guard let sword = sword else {
-            
-            return attack
+        if let sword = sword {
+            let swordAndAttack = sword.damage + attack
+            return swordAndAttack
         }
-        let swordAndAttack = sword.damage + attack
-        return swordAndAttack
+        return attack
     }
     
-    init(name: String, life: Int, attack: Int, sword: Sword?) {
-        self.name = name
+    init(life: Int, attack: Int, sword: Sword?) {
         self.life = life
         self.attack = attack
         self.sword = sword

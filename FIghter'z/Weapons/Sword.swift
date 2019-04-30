@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Sword: Weapon {
+class Sword: Weapon { // class to create sword 
     override init(name: String, damage: Int) {
         super.init(name: name, damage: damage)
     }

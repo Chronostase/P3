@@ -1,5 +1,5 @@
 //
-//  Weapon.swift
+//  main.swift
 //  FIghter'z
 //
 //  Created by Thomas on 25/04/2019.
@@ -8,16 +8,13 @@
 
 import Foundation
 
-class Weapon { // class to create weapon
+class Main { // class to call game
     
     //---------------------------//
     //Mark Properties
     //---------------------------//
-    var name: String
-    var damage: Int
     
-    init(name: String, damage: Int) {
-        self.name = name
-        self.damage = damage
-    }
+    let game = Game()
 }
+let main = Main()
+main.game.launchSoft()

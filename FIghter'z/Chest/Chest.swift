@@ -8,6 +8,6 @@
 
 import Foundation
 
-class Chest {
+class Chest { // class to create a lootbox
     
 }

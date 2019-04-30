@@ -8,6 +8,9 @@
 
 import Foundation
 
-class Wizard: Character {
-    
+class Wizard: Character { // class to create a wizard
+    var heal: Int = 5
+    init() {
+        super.init(life: 80, attack: 0, sword: nil)
+    }
 }

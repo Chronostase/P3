@@ -8,6 +8,8 @@
 
 import Foundation
 
-class Dwarf: Character {
-    
+class Dwarf: Character { // class to create a dwarf
+    init() {
+        super.init(life: 80, attack: 6, sword: nil)
+    }
 }
