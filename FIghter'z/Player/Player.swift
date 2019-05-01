@@ -13,7 +13,7 @@ class Player { //Class who affect player
     //---------------------------//
     //Mark Properties
     //---------------------------//
-    var nameArray: [String] = []
+    
     var team: [Character] = []
     var opponentTeam: [Character] = []
     
@@ -55,23 +55,22 @@ class Player { //Class who affect player
     private func rename(_ fighter: Character) {
         print("Chose the name of your fighters")
         if let name = readLine()?.lowercased() {
-    
-            fighter.name.append(name)
-            checkName(of: fighter)
+            if nameIsDifferent(of: fighter,name) == true {
+                fighter.name = name
+                print("You choose \(fighter.name)")
+            } else {
+                rename(fighter)
+            }
         }
     }
     
-    func checkName(of fighter: Character) {
-        for _ in team {
-            if fighter.name != nameArray {
-                nameArray.append(fighter.name[0])
-            } else {
-                if fighter.name == nameArray {
-                    fighter.name.removeAll()
-                    print("You already have a character with this name choose another one.")
-                    rename(fighter)
-                }
+    func nameIsDifferent(of fighter: Character,_ name: String) -> Bool {
+        for character in team {
+            if character.name == name {
+                print("You already have a character with this name choose another one.")
+                return false
             }
         }
+        return true
     }
 }

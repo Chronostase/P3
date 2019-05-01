@@ -14,7 +14,7 @@ class Character { // class to create characters
     //Mark Properties
     //---------------------------//
     
-    var name: [String] = []
+    var name: String = ""
     var life: Int
     var attack: Int
     var sword: Sword?
