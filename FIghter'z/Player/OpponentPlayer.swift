@@ -1,28 +1,22 @@
 //
-//  Weapon.swift
+//  OpponentPlayer.swift
 //  FIghter'z
 //
-//  Created by Thomas on 25/04/2019.
+//  Created by Thomas on 02/05/2019.
 //  Copyright © 2019 Thomas. All rights reserved.
 //
 
 import Foundation
-
-class Weapon { // class to create weapon
+class OpponentPlayer: PlayerA {
     
     //---------------------------//
     //MARK: - Properties
     //---------------------------//
     
-    var name: String
-    var damage: Int
+    var opponentTeam: [Character] = []
     
     //---------------------------//
-    //MARK: - Init
+    //MARK: - Func
     //---------------------------//
     
-    init(name: String, damage: Int) {
-        self.name = name
-        self.damage = damage
-    }
 }

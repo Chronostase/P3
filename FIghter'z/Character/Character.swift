@@ -9,12 +9,12 @@
 import Foundation
 
 class Character { // class to create characters
-    
+  
     //---------------------------//
-    //Mark Properties
+    //MARK: - Properties
     //---------------------------//
     
-    var name: String = ""
+    var name = String()
     var life: Int
     var attack: Int
     var sword: Sword?
@@ -26,7 +26,11 @@ class Character { // class to create characters
         return attack
     }
     
-    init(life: Int, attack: Int, sword: Sword?) {
+    //---------------------------//
+    //MARK: - Init
+    //---------------------------//
+    
+    init(life: Int, attack: Int, sword: Sword? = nil) {
         self.life = life
         self.attack = attack
         self.sword = sword

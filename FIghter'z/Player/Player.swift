@@ -11,14 +11,13 @@ import Foundation
 class Player { //Class who affect player
     
     //---------------------------//
-    //Mark Properties
+    //MARK: - Properties
     //---------------------------//
     
     var team: [Character] = []
-    var opponentTeam: [Character] = []
     
     //---------------------------//
-    //Mark Func
+    //MARK: - Func
     //---------------------------//
     
     func createTeam() {
@@ -27,19 +26,19 @@ class Player { //Class who affect player
                 switch userChoice {
                 case "1":
                     let fighter = Fighter()
-                    addCharacter(fighter)
+                    addCharaInTeam(fighter)
                     rename(fighter)
                 case "2":
                     let wizard = Wizard()
-                    addCharacter(wizard)
+                    addCharaInTeam(wizard)
                     rename(wizard)
                 case "3":
                     let dwarf = Dwarf()
-                    addCharacter(dwarf)
+                    addCharaInTeam(dwarf)
                     rename(dwarf)
                 case "4":
                     let colossus = Colossus()
-                    addCharacter(colossus)
+                    addCharaInTeam(colossus)
                     rename(colossus)
                 default:
                     print("Please select a correct number !")
@@ -48,14 +47,21 @@ class Player { //Class who affect player
         }
     }
     
-    private func addCharacter(_ fighter: Character) {
-        team.append(fighter)
+    //---------------------------//
+    //MARK: - Private Func
+    //---------------------------//
+    
+    private func addCharaInTeam(_ fighter: Character) {
+        if team.count < 3 {
+            print("You add an ally")
+            team.append(fighter)
+        }
     }
     
     private func rename(_ fighter: Character) {
         print("Chose the name of your fighters")
         if let name = readLine()?.lowercased() {
-            if nameIsDifferent(of: fighter,name) == true {
+            if nameIsDifferent(of: name) == true {
                 fighter.name = name
                 print("You choose \(fighter.name)")
             } else {
@@ -64,7 +70,7 @@ class Player { //Class who affect player
         }
     }
     
-    func nameIsDifferent(of fighter: Character,_ name: String) -> Bool {
+    private func nameIsDifferent(of name: String) -> Bool {
         for character in team {
             if character.name == name {
                 print("You already have a character with this name choose another one.")

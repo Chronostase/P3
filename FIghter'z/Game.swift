@@ -11,47 +11,66 @@ import Foundation
 class Game { // Setup and rules for the game
     
     //---------------------------//
-    //Mark Properties
+    //MARK: - Properties
     //---------------------------//
-    let player = Player()
+    
+    let playerA = Player()
+    let playerB = Player()
     var infinity = true
     
     //---------------------------//
-    //Mark Func
+    //MARK: - Func
     //---------------------------//
     
     func launchSoft() {
-        setup()
         launch()
+        setup()
     }
+    
+    //---------------------------//
+    //MARK: - Private Func
+    //---------------------------//
+    
     
     private func setup() {
         presentation()
-        player.createTeam()
+        playerA.createTeam()
+        playerB.createTeam()
     }
     
     private func launch() {
         while infinity == true {
-            if player.team.count == 3 {
-                print(player.team[0].name)
-                print(player.team[1].name)
-                print(player.team[2].name)
-                infinity = false
-            }
+            printCharaInTeam(of: playerA)
+            printCharaInTeam(of: playerB)
+            infinity = false
         }
     }
     
     private func presentation() {
-        print("Welcome to Fighter'z, all you need to do is to select three fighter and go to the fight !")
+        print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")
         selectCharacter()
     }
     
-    func selectCharacter() {
-        print("Now you just have to add three characters in your team !"
-        + "\n Which character do you want to add ?"
-        + "\n1 Fighter : A balanced fighter who start with a sword."
-        + "\n2 Wizard : His main ability is an heal."
-        + "\n3 Dward : A character who focused on attack with low life."
-        + "\n4 Colossus : A kind of armed tank")
+    private func selectCharacter() {
+        print("""
+Now you just have to add three characters in your team !
+Which character do you want to add ?
+
+    1 Fighter : A balanced fighter who start with a sword.
+
+    2 Wizard : His main ability is an heal.
+
+    3 Dwarf : A character who focused on attack with low life.
+
+    4 Colossus : A kind of armed tank
+""")
+    }
+    
+    private func printCharaInTeam(of player: Player) {
+        if player.team.count >= 3 {
+            for characters in player.team {
+                print(characters.name)
+            }
+        }
     }
 }

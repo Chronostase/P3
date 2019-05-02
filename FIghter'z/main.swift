@@ -11,7 +11,7 @@ import Foundation
 class Main { // class to call game
     
     //---------------------------//
-    //Mark Properties
+    //MARK: - Properties
     //---------------------------//
     
     let game = Game()

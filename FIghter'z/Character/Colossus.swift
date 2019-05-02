@@ -9,6 +9,11 @@
 import Foundation
 
 class Colossus: Character { // class to create a colossus
+    
+    //---------------------------//
+    //MARK: - Init
+    //---------------------------//
+    
     init() {
         super.init(life: 120, attack: 2, sword: nil)
     }
