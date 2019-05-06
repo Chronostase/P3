@@ -15,10 +15,42 @@ class Player { //Class who affect player
     //---------------------------//
     
     var team: [Character] = []
-    
+    var selectedCharacter: Character?
+    var targetCharacter: Character?
+   
     //---------------------------//
     //MARK: - Func
     //---------------------------//
+    
+    func selectACharater() {
+        if let userChoice = readLine() {
+            switch userChoice {
+            case "1":
+                selectedCharacter = team[0]
+            case "2":
+                selectedCharacter = team[1]
+            case "3":
+                selectedCharacter = team[2]
+            default:
+                print("Please select a correct number")
+            }
+        }
+    }
+    
+    func selectTarget(from player: Player) {
+        if let userChoice = readLine() {
+            switch userChoice {
+            case "1":
+                targetCharacter = player.team[0]
+            case "2":
+                targetCharacter = player.team[1]
+            case "3":
+                targetCharacter = player.team[2]
+            default:
+                print("Please select a correct number")
+            }
+        }
+    }
     
     func createTeam() {
         while team.count < 3 {
