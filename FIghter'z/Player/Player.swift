@@ -61,7 +61,7 @@ class Player { //Class who affect player
                     addCharaInTeam(fighter)
                     rename(fighter)
                 case "2":
-                    let wizard = Wizard()
+                    let wizard = Wizard(heal: 5)
                     addCharaInTeam(wizard)
                     rename(wizard)
                 case "3":

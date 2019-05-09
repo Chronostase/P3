@@ -42,8 +42,8 @@ class Game { // Setup and rules for the game
         playerA.selectACharater()
         presentCharacterSelection(of: playerB, for: "target :")
         playerA.selectTarget()
-//        fightInterface()
-//        fight()
+        fightInterface()
+        fight()
     }
     
     private func launch() {
@@ -52,47 +52,48 @@ class Game { // Setup and rules for the game
         }
     }
     
-//    private func fight() {
-//        if let userChoice = readLine() {
-//            switch userChoice {
-//            case "1":
-//                if let selectedCharacter = playerA.selectedCharacter {
-//                    if let targetCharacter = playerA.selectedCharacter {
-//                        targetCharacter.life -= selectedCharacter.totalDamage
-//                    }
-//                }
-//                playerA.selectedCharacter = nil
-//                playerA.targetCharacter = nil
-//            case "2":
-//                    if let targetCharacter = playerA.selectedCharacter {
-//                        if let heal = playerA.selectedCharacter?.heal {
-//                            targetCharacter.life += heal
-//                        }
-//                    }
-//
-//            default:
-//                print("Please select a correct number")
-//            }
-//        }
-//    }
+    private func fight() {
+        if let userChoice = readLine() {
+            switch userChoice {
+            case "1":
+                if let selectedCharacter = playerA.selectedCharacter {
+                    if let targetCharacter = playerA.selectedCharacter {
+                        targetCharacter.life -= selectedCharacter.totalDamage
+                    }
+                }
+                playerA.selectedCharacter = nil
+                playerA.targetCharacter = nil
+            case "2":
+                if let character = playerA.selectedCharacter as? Wizard {
+                    if let targetCharacter = playerA.targetCharacter {
+                        targetCharacter.life += character.heal
+                    }
+                }
+
+            default:
+                print("Please select a correct number")
+            }
+        }
+    }
     
-//    private func fightInterface() {
-//        if let heal = playerA.selectedCharacter?.heal {
-//            if heal > 0 {
-//                print("""
-//What do you want to do ?
-//
-//    1. Heal !
-//""")
-//            }
-//        } else {
-//            print("""
-//What do you want to do ?
-//
-//    2. Attack !
-//""")
-//        }
-//    }
+    private func fightInterface() {
+        if let character = playerA.selectedCharacter as? Wizard{
+            if character.heal > 0 {
+                print("""
+What do you want to do ?
+
+    1. Heal !
+""")
+            } else {
+                print("""
+What do you want to do ?
+
+    2. Attack !
+""")
+            }
+            
+        }
+    }
     
     private func presentation() {
         print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")
