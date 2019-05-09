@@ -9,7 +9,7 @@
 import Foundation
 
 class Fighter: Character { // class to create a fighter
-    
+
     //---------------------------//
     //MARK: - Init
     //---------------------------//

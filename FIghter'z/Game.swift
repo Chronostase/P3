@@ -41,7 +41,9 @@ class Game { // Setup and rules for the game
         presentCharacterSelection(of: playerA, for: "Character to do an action :")
         playerA.selectACharater()
         presentCharacterSelection(of: playerB, for: "target :")
-        playerA.selectTarget(from: playerB)
+        playerA.selectTarget()
+//        fightInterface()
+//        fight()
     }
     
     private func launch() {
@@ -49,6 +51,48 @@ class Game { // Setup and rules for the game
             infinity = false
         }
     }
+    
+//    private func fight() {
+//        if let userChoice = readLine() {
+//            switch userChoice {
+//            case "1":
+//                if let selectedCharacter = playerA.selectedCharacter {
+//                    if let targetCharacter = playerA.selectedCharacter {
+//                        targetCharacter.life -= selectedCharacter.totalDamage
+//                    }
+//                }
+//                playerA.selectedCharacter = nil
+//                playerA.targetCharacter = nil
+//            case "2":
+//                    if let targetCharacter = playerA.selectedCharacter {
+//                        if let heal = playerA.selectedCharacter?.heal {
+//                            targetCharacter.life += heal
+//                        }
+//                    }
+//
+//            default:
+//                print("Please select a correct number")
+//            }
+//        }
+//    }
+    
+//    private func fightInterface() {
+//        if let heal = playerA.selectedCharacter?.heal {
+//            if heal > 0 {
+//                print("""
+//What do you want to do ?
+//
+//    1. Heal !
+//""")
+//            }
+//        } else {
+//            print("""
+//What do you want to do ?
+//
+//    2. Attack !
+//""")
+//        }
+//    }
     
     private func presentation() {
         print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")

@@ -37,15 +37,15 @@ class Player { //Class who affect player
         }
     }
     
-    func selectTarget(from player: Player) {
+    func selectTarget() {
         if let userChoice = readLine() {
             switch userChoice {
             case "1":
-                targetCharacter = player.team[0]
+                targetCharacter = team[0]
             case "2":
-                targetCharacter = player.team[1]
+                targetCharacter = team[1]
             case "3":
-                targetCharacter = player.team[2]
+                targetCharacter = team[2]
             default:
                 print("Please select a correct number")
             }
