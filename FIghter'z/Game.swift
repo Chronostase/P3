@@ -38,38 +38,50 @@ class Game { // Setup and rules for the game
         chooseCharacter(for: "ennemies team")
         playerB.createTeam()
         teamInformations()
-        presentCharacterSelection(of: playerA, for: "Character to do an action :")
-        playerA.selectACharater()
-        presentCharacterSelection(of: playerB, for: "target :")
-        playerA.selectTarget()
-        fightInterface()
+        print("Exit team info, enter selec chara")
+        selectCharacterAndTarget()
+        print("Exit select chara, enter Fight")
         fight()
     }
     
     private func launch() {
+        //FIXME: Make sur that i need this
         while infinity == true {
             infinity = false
         }
     }
     
+    private func checkIfDead(player: Player) {
+        for (index, character) in player.team.enumerated() {
+            if character.life <= 0 {
+                player.team.remove(at: index)
+            }
+        }
+    }
+    
     private func fight() {
-        if let userChoice = readLine() {
+        while playerA.team.count >= 1 || playerB.team.count >= 1 {
+            fightInterface()
+            guard let userChoice = readLine() else {
+                
+                return print("An error as occured")
+            }
             switch userChoice {
             case "1":
-                if let selectedCharacter = playerA.selectedCharacter {
-                    if let targetCharacter = playerA.selectedCharacter {
-                        targetCharacter.life -= selectedCharacter.totalDamage
-                    }
+                if let selectedCharacter = playerA.selectedCharacter,
+                    let targetCharacter = playerA.selectedCharacter {
+                    targetCharacter.life -= selectedCharacter.totalDamage
+                    checkIfDead(player: playerA)
+                    checkIfDead(player: playerB)
                 }
-                playerA.selectedCharacter = nil
-                playerA.targetCharacter = nil
+                selectCharacterAndTarget()
+                
             case "2":
                 if let character = playerA.selectedCharacter as? Wizard {
                     if let targetCharacter = playerA.targetCharacter {
                         targetCharacter.life += character.heal
                     }
                 }
-
             default:
                 print("Please select a correct number")
             }
@@ -78,22 +90,20 @@ class Game { // Setup and rules for the game
     
     private func fightInterface() {
         if let character = playerA.selectedCharacter as? Wizard{
-            if character.heal > 0 {
                 print("""
-What do you want to do ?
+What do you want to do with \(character.name) ?
 
-    1. Heal !
+    2. Heal !
 """)
             } else {
                 print("""
-What do you want to do ?
+What do you want to do with  ?
 
-    2. Attack !
+    1. Attack !
 """)
             }
             
         }
-    }
     
     private func presentation() {
         print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")
@@ -129,7 +139,7 @@ Which character do you want to add ?
     
     private func printTeam(_ player: Player, at index: Int) {
         print("""
-            - \(player.team[index].name) with \(player.team[index].life) and \(player.team[index].attack)
+            - \(player.team[index].name)  with \(player.team[index].life) life and \(player.team[index].attack) attack.
             
             """)
     }
@@ -141,5 +151,18 @@ Which character do you want to add ?
             2: \(player.team[1].name)
             3: \(player.team[2].name)
             """)
+    }
+    
+    private func selectCharacterAndTarget() {
+        resetCharacterAndTarget()
+        presentCharacterSelection(of: playerA, for: "Character to do an action :")
+        playerA.selectACharater()
+        presentCharacterSelection(of: playerB, for: "target :")
+        playerA.selectTarget()
+    }
+    
+    private func resetCharacterAndTarget() {
+        playerA.selectedCharacter = nil
+        playerA.targetCharacter = nil
     }
 }

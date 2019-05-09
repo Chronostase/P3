@@ -9,5 +9,4 @@
 import Foundation
 
 class Chest { // class to create a lootbox
-    
 }

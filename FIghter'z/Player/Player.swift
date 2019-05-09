@@ -42,10 +42,19 @@ class Player { //Class who affect player
             switch userChoice {
             case "1":
                 targetCharacter = team[0]
+                if let targetCharacter = targetCharacter {
+                    print("You choose \(targetCharacter)")
+                }
             case "2":
                 targetCharacter = team[1]
+                if let targetCharacter = targetCharacter {
+                    print("You choose \(targetCharacter)")
+                }
             case "3":
                 targetCharacter = team[2]
+                if let targetCharacter = targetCharacter {
+                    print("You choose \(targetCharacter)")
+                }
             default:
                 print("Please select a correct number")
             }
