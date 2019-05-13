@@ -38,9 +38,8 @@ class Game { // Setup and rules for the game
         chooseCharacter(for: "ennemies team")
         playerB.createTeam()
         teamInformations()
-        print("Exit team info, enter selec chara")
-        selectCharacterAndTarget()
-        print("Exit select chara, enter Fight")
+        
+        selectCharacterAndTarget(for: playerA, targetFrom: playerB)
         fight()
     }
     
@@ -60,31 +59,93 @@ class Game { // Setup and rules for the game
     }
     
     private func fight() {
+        var index = 2
         while playerA.team.count >= 1 || playerB.team.count >= 1 {
             fightInterface()
-            guard let userChoice = readLine() else {
-                
-                return print("An error as occured")
+            if (index + 1) % 2 == 1 {
+                print("PLAYER A TURN")
+                actionInFight(for: playerA)
+                selectCharacterAndTarget(for: playerB, targetFrom: playerA)
+                index += 1
+            } else {
+                print("PLAYER B TURN")
+                actionInFight(for: playerB)
+                index += 1
+                selectCharacterAndTarget(for: playerA, targetFrom: playerB)
             }
-            switch userChoice {
-            case "1":
-                if let selectedCharacter = playerA.selectedCharacter,
-                    let targetCharacter = playerA.selectedCharacter {
-                    targetCharacter.life -= selectedCharacter.totalDamage
-                    checkIfDead(player: playerA)
-                    checkIfDead(player: playerB)
-                }
-                selectCharacterAndTarget()
-                
-            case "2":
-                if let character = playerA.selectedCharacter as? Wizard {
-                    if let targetCharacter = playerA.targetCharacter {
-                        targetCharacter.life += character.heal
-                    }
-                }
-            default:
-                print("Please select a correct number")
+        }
+    }
+    
+//    private func fight() {
+//        while playerA.team.count >= 1 || playerB.team.count >= 1 {
+//            fightInterface()
+//            guard let userChoice = readLine() else {
+//
+//                return print("An error as occured")
+//            }
+//            switch userChoice {
+//            case "1":
+//                if let selectedCharacter = playerA.selectedCharacter,
+//                    let targetCharacter = playerA.selectedCharacter {
+//                    targetCharacter.life -= selectedCharacter.totalDamage
+//                    print("""
+//                        You inflicted \(selectedCharacter.totalDamage) damage.
+//                        And your target have \(targetCharacter.life) life left.
+//                        """)
+//                    checkIfDead(player: playerA)
+//                    checkIfDead(player: playerB)
+//                }
+//                selectCharacterAndTarget()
+//
+//            case "2":
+//                if let character = playerA.selectedCharacter as? Wizard {
+//                    if let targetCharacter = playerA.targetCharacter {
+//                        targetCharacter.life += character.heal
+//                        print("""
+//                            You heal \(character.heal) point of life.
+//                            And your target have \(targetCharacter.life) life left.
+//                            """)
+//                    }
+//                }
+//                selectCharacterAndTarget()
+//
+//            default:
+//                print("Please select a correct number")
+//            }
+//        }
+//    }
+    
+    private func actionInFight(for player: Player) {
+        guard let userChoice = readLine() else {
+            
+            return print("An error as occured")
+        }
+        switch userChoice {
+        case "1":
+            if let selectedCharacter = player.selectedCharacter,
+                let targetCharacter = player.selectedCharacter {
+                targetCharacter.life -= selectedCharacter.totalDamage
+                print("""
+                    You inflicted \(selectedCharacter.totalDamage) damage.
+                    And your target have \(targetCharacter.life) life left.
+                    """)
+                checkIfDead(player: playerA)
+                checkIfDead(player: playerB)
             }
+            
+        case "2":
+            if let character = player.selectedCharacter as? Wizard {
+                if let targetCharacter = player.targetCharacter {
+                    targetCharacter.life += character.heal
+                    print("""
+                        You heal \(character.heal) point of life.
+                        And your target have \(targetCharacter.life) life left.
+                        """)
+                }
+            }
+            
+        default:
+            print("Please select a correct number")
         }
     }
     
@@ -145,24 +206,26 @@ Which character do you want to add ?
     }
     
     private func presentCharacterSelection(of player: Player, for string: String) {
-        print("""
-            Choose a \(string) :
-            1: \(player.team[0].name)
-            2: \(player.team[1].name)
-            3: \(player.team[2].name)
-            """)
+        var index = 1
+        print("Please select a \(string)")
+        for character in player.team {
+            print("""
+\(index): \(character.name)
+""")
+            index += 1
+        }
+    }
+
+    private func selectCharacterAndTarget(for player: Player, targetFrom: Player) {
+        resetCharacterAndTarget(for: player)
+        presentCharacterSelection(of: player, for: "Character to do an action :")
+        player.selectACharater()
+        presentCharacterSelection(of: targetFrom, for: "target :")
+        player.selectTarget()
     }
     
-    private func selectCharacterAndTarget() {
-        resetCharacterAndTarget()
-        presentCharacterSelection(of: playerA, for: "Character to do an action :")
-        playerA.selectACharater()
-        presentCharacterSelection(of: playerB, for: "target :")
-        playerA.selectTarget()
-    }
-    
-    private func resetCharacterAndTarget() {
-        playerA.selectedCharacter = nil
-        playerA.targetCharacter = nil
+    private func resetCharacterAndTarget(for player: Player) {
+        player.selectedCharacter = nil
+        player.targetCharacter = nil
     }
 }
