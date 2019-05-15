@@ -14,16 +14,15 @@ class Game { // Setup and rules for the game
     //MARK: - Properties
     //---------------------------//
     
-    let playerA = Player()
-    let playerB = Player()
-    var infinity = true
+    var playerInGame: [Player] = []
+    var attackingPlayer = Player()
+    var opponnentPlayer = Player()
     
     //---------------------------//
     //MARK: - Func
     //---------------------------//
     
     func launchSoft() {
-        launch()
         setup()
     }
     
@@ -33,24 +32,17 @@ class Game { // Setup and rules for the game
     
     
     private func setup() {
+        addPlayerInGame()
         presentation()
-        playerA.createTeam()
+        attackingPlayer.createTeam()
         chooseCharacter(for: "ennemies team")
-        playerB.createTeam()
+        opponnentPlayer.createTeam()
         teamInformations()
-        
-        selectCharacterAndTarget(for: playerA, targetFrom: playerB)
+        selectCharacterAndTarget()
         fight()
     }
     
-    private func launch() {
-        //FIXME: Make sur that i need this
-        while infinity == true {
-            infinity = false
-        }
-    }
-    
-    private func checkIfDead(player: Player) {
+    private func checkIfDeadInTeam(of player: Player) {
         for (index, character) in player.team.enumerated() {
             if character.life <= 0 {
                 player.team.remove(at: index)
@@ -59,83 +51,35 @@ class Game { // Setup and rules for the game
     }
     
     private func fight() {
-        var index = 2
-        while playerA.team.count >= 1 || playerB.team.count >= 1 {
+        while attackingPlayer.team.count != 0 || opponnentPlayer.team.count != 0 {
             fightInterface()
-            if (index + 1) % 2 == 1 {
-                print("PLAYER A TURN")
-                actionInFight(for: playerA)
-                selectCharacterAndTarget(for: playerB, targetFrom: playerA)
-                index += 1
-            } else {
-                print("PLAYER B TURN")
-                actionInFight(for: playerB)
-                index += 1
-                selectCharacterAndTarget(for: playerA, targetFrom: playerB)
-            }
+            actionInFight()
+            swap(&attackingPlayer, &opponnentPlayer)
+            selectCharacterAndTarget()
         }
     }
     
-//    private func fight() {
-//        while playerA.team.count >= 1 || playerB.team.count >= 1 {
-//            fightInterface()
-//            guard let userChoice = readLine() else {
-//
-//                return print("An error as occured")
-//            }
-//            switch userChoice {
-//            case "1":
-//                if let selectedCharacter = playerA.selectedCharacter,
-//                    let targetCharacter = playerA.selectedCharacter {
-//                    targetCharacter.life -= selectedCharacter.totalDamage
-//                    print("""
-//                        You inflicted \(selectedCharacter.totalDamage) damage.
-//                        And your target have \(targetCharacter.life) life left.
-//                        """)
-//                    checkIfDead(player: playerA)
-//                    checkIfDead(player: playerB)
-//                }
-//                selectCharacterAndTarget()
-//
-//            case "2":
-//                if let character = playerA.selectedCharacter as? Wizard {
-//                    if let targetCharacter = playerA.targetCharacter {
-//                        targetCharacter.life += character.heal
-//                        print("""
-//                            You heal \(character.heal) point of life.
-//                            And your target have \(targetCharacter.life) life left.
-//                            """)
-//                    }
-//                }
-//                selectCharacterAndTarget()
-//
-//            default:
-//                print("Please select a correct number")
-//            }
-//        }
-//    }
-    
-    private func actionInFight(for player: Player) {
+    private func actionInFight() {
         guard let userChoice = readLine() else {
             
             return print("An error as occured")
         }
         switch userChoice {
         case "1":
-            if let selectedCharacter = player.selectedCharacter,
-                let targetCharacter = player.selectedCharacter {
+            if let selectedCharacter = attackingPlayer.selectedCharacter,
+                let targetCharacter = attackingPlayer.targetCharacter {
                 targetCharacter.life -= selectedCharacter.totalDamage
                 print("""
                     You inflicted \(selectedCharacter.totalDamage) damage.
-                    And your target have \(targetCharacter.life) life left.
+                    And your \(targetCharacter.name) have \(targetCharacter.life) life left.
                     """)
-                checkIfDead(player: playerA)
-                checkIfDead(player: playerB)
+                checkIfDeadInTeam(of: attackingPlayer)
+                checkIfDeadInTeam(of: opponnentPlayer)
             }
             
         case "2":
-            if let character = player.selectedCharacter as? Wizard {
-                if let targetCharacter = player.targetCharacter {
+            if let character = attackingPlayer.selectedCharacter as? Wizard {
+                if let targetCharacter = attackingPlayer.targetCharacter {
                     targetCharacter.life += character.heal
                     print("""
                         You heal \(character.heal) point of life.
@@ -150,7 +94,8 @@ class Game { // Setup and rules for the game
     }
     
     private func fightInterface() {
-        if let character = playerA.selectedCharacter as? Wizard{
+        //FIXME: Changer le système de notation
+        if let character = attackingPlayer.selectedCharacter as? Wizard{
                 print("""
 What do you want to do with \(character.name) ?
 
@@ -166,12 +111,7 @@ What do you want to do with  ?
             
         }
     
-    private func presentation() {
-        print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")
-        chooseCharacter(for: "your team")
-    }
-    
-    private func chooseCharacter(for team: String) {
+    func chooseCharacter(for team: String) {
         print("""
 Now you just have to add three characters in \(team) !
 Which character do you want to add ?
@@ -188,21 +128,20 @@ Which character do you want to add ?
     
     private func teamInformations() {
         print(" The fight will begin ! In you team you have :")
-        printTeam(playerA, at: 0)
-        printTeam(playerA, at: 1)
-        printTeam(playerA, at: 2)
+        printTeam(at: 0)
         
         print("In the ennemies team there is:")
-        printTeam(playerB, at: 0)
-        printTeam(playerB, at: 1)
-        printTeam(playerB, at: 2)
+        printTeam(at: 1)
     }
     
-    private func printTeam(_ player: Player, at index: Int) {
-        print("""
-            - \(player.team[index].name)  with \(player.team[index].life) life and \(player.team[index].attack) attack.
-            
-            """)
+    private func printTeam(at index: Int) {
+        for character in playerInGame[index].team {
+            print("""
+                
+                \(character.name): \(character.life) life and \(character.attack) attack
+                
+                """)
+        }
     }
     
     private func presentCharacterSelection(of player: Player, for string: String) {
@@ -215,17 +154,29 @@ Which character do you want to add ?
             index += 1
         }
     }
-
-    private func selectCharacterAndTarget(for player: Player, targetFrom: Player) {
-        resetCharacterAndTarget(for: player)
-        presentCharacterSelection(of: player, for: "Character to do an action :")
-        player.selectACharater()
-        presentCharacterSelection(of: targetFrom, for: "target :")
-        player.selectTarget()
+    
+    private func resetCharacterAndTarget() {
+        for player in playerInGame {
+            player.selectedCharacter = nil
+            player.targetCharacter = nil
+        }
     }
     
-    private func resetCharacterAndTarget(for player: Player) {
-        player.selectedCharacter = nil
-        player.targetCharacter = nil
+    private func addPlayerInGame() {
+        playerInGame.append(attackingPlayer)
+        playerInGame.append(opponnentPlayer)
+    }
+
+    private func selectCharacterAndTarget() {
+        resetCharacterAndTarget()
+        presentCharacterSelection(of: attackingPlayer, for: "Character to do an action :")
+        attackingPlayer.selectACharater()
+        if (attackingPlayer.selectedCharacter as? Wizard) != nil {
+            presentCharacterSelection(of: attackingPlayer, for: "target")
+            attackingPlayer.selectTargetinTeam(of: attackingPlayer)
+        } else {
+            presentCharacterSelection(of: opponnentPlayer, for: "target :")
+            attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
+        }
     }
 }

@@ -17,7 +17,6 @@ class Player { //Class who affect player
     var team: [Character] = []
     var selectedCharacter: Character?
     var targetCharacter: Character?
-   
     //---------------------------//
     //MARK: - Func
     //---------------------------//
@@ -33,27 +32,29 @@ class Player { //Class who affect player
                 selectedCharacter = team[2]
             default:
                 print("Please select a correct number")
+                selectACharater()
             }
         }
     }
     
-    func selectTarget() {
+    func selectTargetinTeam(of player: Player) {
+        print("Please select a target")
         if let userChoice = readLine() {
             switch userChoice {
             case "1":
-                targetCharacter = team[0]
+                targetCharacter = player.team[0]
                 if let targetCharacter = targetCharacter {
-                    print("You choose \(targetCharacter)")
+                    print("You choose \(targetCharacter.name) as target character")
                 }
             case "2":
-                targetCharacter = team[1]
+                targetCharacter = player.team[1]
                 if let targetCharacter = targetCharacter {
-                    print("You choose \(targetCharacter)")
+                    print("You choose \(targetCharacter.name) as target character")
                 }
             case "3":
-                targetCharacter = team[2]
+                targetCharacter = player.team[2]
                 if let targetCharacter = targetCharacter {
-                    print("You choose \(targetCharacter)")
+                    print("You choose \(targetCharacter.name) as target character")
                 }
             default:
                 print("Please select a correct number")
@@ -83,6 +84,7 @@ class Player { //Class who affect player
                     rename(colossus)
                 default:
                     print("Please select a correct number !")
+                    createTeam()
                 }
             }
         }
@@ -96,6 +98,8 @@ class Player { //Class who affect player
         if team.count < 3 {
             print("You add an ally")
             team.append(fighter)
+        } else {
+            print("You team is full")
         }
     }
     
@@ -104,7 +108,7 @@ class Player { //Class who affect player
         if let name = readLine()?.lowercased() {
             if nameIsDifferent(of: name) == true {
                 fighter.name = name
-                print("You choose \(fighter.name)")
+                print("You choose \(fighter.name), select another number")
             } else {
                 rename(fighter)
             }
