@@ -38,7 +38,6 @@ class Player { //Class who affect player
     }
     
     func selectTargetinTeam(of player: Player) {
-        print("Please select a target")
         if let userChoice = readLine() {
             switch userChoice {
             case "1":
@@ -123,5 +122,14 @@ class Player { //Class who affect player
             }
         }
         return true
+    }
+    
+    
+    func checkIfDeadInTeam() {
+        for (index, character) in team.enumerated() {
+            if character.life <= 0 {
+                team.remove(at: index)
+            }
+        }
     }
 }

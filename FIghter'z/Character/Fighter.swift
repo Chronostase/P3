@@ -15,6 +15,6 @@ class Fighter: Character { // class to create a fighter
     //---------------------------//
     
     init(sword: Sword? = Sword(name: "Needle", damage: 10)) {
-        super.init(life: 100, attack: 3, sword: sword)
+        super.init(life: 100, attack: 100, sword: sword)
     }
 }

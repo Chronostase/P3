@@ -26,6 +26,21 @@ class Game { // Setup and rules for the game
         setup()
     }
     
+    func stopOrRetry() {
+        if let userchoice = readLine() {
+            switch userchoice {
+            case "1":
+                resetCharacterAndTarget()
+                resetTeam()
+                setup()
+            case "2":
+                resetTeam()
+            default:
+                print("Please select a correct number")
+            }
+        }
+    }
+    
     //---------------------------//
     //MARK: - Private Func
     //---------------------------//
@@ -42,21 +57,14 @@ class Game { // Setup and rules for the game
         fight()
     }
     
-    private func checkIfDeadInTeam(of player: Player) {
-        for (index, character) in player.team.enumerated() {
-            if character.life <= 0 {
-                player.team.remove(at: index)
-            }
-        }
-    }
-    
     private func fight() {
-        while attackingPlayer.team.count != 0 || opponnentPlayer.team.count != 0 {
+        while attackingPlayer.team.count >= 1 || opponnentPlayer.team.count >= 1 {
             fightInterface()
             actionInFight()
             swap(&attackingPlayer, &opponnentPlayer)
             selectCharacterAndTarget()
         }
+        endGame()
     }
     
     private func actionInFight() {
@@ -73,8 +81,8 @@ class Game { // Setup and rules for the game
                     You inflicted \(selectedCharacter.totalDamage) damage.
                     And your \(targetCharacter.name) have \(targetCharacter.life) life left.
                     """)
-                checkIfDeadInTeam(of: attackingPlayer)
-                checkIfDeadInTeam(of: opponnentPlayer)
+                attackingPlayer.checkIfDeadInTeam()
+                opponnentPlayer.checkIfDeadInTeam()
             }
             
         case "2":
@@ -93,72 +101,17 @@ class Game { // Setup and rules for the game
         }
     }
     
-    private func fightInterface() {
-        //FIXME: Changer le système de notation
-        if let character = attackingPlayer.selectedCharacter as? Wizard{
-                print("""
-What do you want to do with \(character.name) ?
-
-    2. Heal !
-""")
-            } else {
-                print("""
-What do you want to do with  ?
-
-    1. Attack !
-""")
-            }
-            
-        }
-    
-    func chooseCharacter(for team: String) {
-        print("""
-Now you just have to add three characters in \(team) !
-Which character do you want to add ?
-
-    1 Fighter : A balanced fighter who start with a sword.
-
-    2 Wizard : His main ability is an heal.
-
-    3 Dwarf : A character who focused on attack with low life.
-
-    4 Colossus : A kind of armed tank
-""")
-    }
-    
-    private func teamInformations() {
-        print(" The fight will begin ! In you team you have :")
-        printTeam(at: 0)
-        
-        print("In the ennemies team there is:")
-        printTeam(at: 1)
-    }
-    
-    private func printTeam(at index: Int) {
-        for character in playerInGame[index].team {
-            print("""
-                
-                \(character.name): \(character.life) life and \(character.attack) attack
-                
-                """)
-        }
-    }
-    
-    private func presentCharacterSelection(of player: Player, for string: String) {
-        var index = 1
-        print("Please select a \(string)")
-        for character in player.team {
-            print("""
-\(index): \(character.name)
-""")
-            index += 1
-        }
-    }
     
     private func resetCharacterAndTarget() {
         for player in playerInGame {
             player.selectedCharacter = nil
             player.targetCharacter = nil
+        }
+    }
+    
+    private func resetTeam() {
+        for player in playerInGame {
+            player.team.removeAll()
         }
     }
     
@@ -177,6 +130,13 @@ Which character do you want to add ?
         } else {
             presentCharacterSelection(of: opponnentPlayer, for: "target :")
             attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
+        }
+    }
+    
+    private func endGame() {
+        if attackingPlayer.team.count == 0 || opponnentPlayer.team.count == 0 {
+            presentationStopOrRetry()
+            stopOrRetry()
         }
     }
 }
