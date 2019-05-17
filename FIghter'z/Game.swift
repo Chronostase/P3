@@ -34,7 +34,7 @@ class Game { // Setup and rules for the game
                 resetTeam()
                 setup()
             case "2":
-                resetTeam()
+                print("Good bye !")
             default:
                 print("Please select a correct number")
             }
@@ -48,21 +48,22 @@ class Game { // Setup and rules for the game
     
     private func setup() {
         addPlayerInGame()
+        namePlayer()
         presentation()
         attackingPlayer.createTeam()
         chooseCharacter(for: "ennemies team")
         opponnentPlayer.createTeam()
         teamInformations()
-        selectCharacterAndTarget()
         fight()
     }
     
     private func fight() {
-        while attackingPlayer.team.count >= 1 || opponnentPlayer.team.count >= 1 {
+        while attackingPlayer.team.count != 0 && opponnentPlayer.team.count != 0 {
+            print("Enter in loop")
+            selectCharacterAndTarget()
             fightInterface()
             actionInFight()
             swap(&attackingPlayer, &opponnentPlayer)
-            selectCharacterAndTarget()
         }
         endGame()
     }
@@ -70,7 +71,7 @@ class Game { // Setup and rules for the game
     private func actionInFight() {
         guard let userChoice = readLine() else {
             
-            return print("An error as occured")
+            return print("Couldn't have information from readLine")
         }
         switch userChoice {
         case "1":
@@ -81,7 +82,9 @@ class Game { // Setup and rules for the game
                     You inflicted \(selectedCharacter.totalDamage) damage.
                     And your \(targetCharacter.name) have \(targetCharacter.life) life left.
                     """)
+                print("In team of attacking player.")
                 attackingPlayer.checkIfDeadInTeam()
+                print("In team of opponnent player.")
                 opponnentPlayer.checkIfDeadInTeam()
             }
             
@@ -121,9 +124,13 @@ class Game { // Setup and rules for the game
     }
 
     private func selectCharacterAndTarget() {
+        print("Enter in selectedchara/target")
         resetCharacterAndTarget()
         presentCharacterSelection(of: attackingPlayer, for: "Character to do an action :")
         attackingPlayer.selectACharater()
+        //        if let _ = attackingPlayer.selectedCharacter as? Wizard {
+        //
+        //        }
         if (attackingPlayer.selectedCharacter as? Wizard) != nil {
             presentCharacterSelection(of: attackingPlayer, for: "target")
             attackingPlayer.selectTargetinTeam(of: attackingPlayer)
@@ -131,12 +138,24 @@ class Game { // Setup and rules for the game
             presentCharacterSelection(of: opponnentPlayer, for: "target :")
             attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
         }
+        print("Exit of selectedchara/target")
+    }
+    
+    private func namePlayer() {
+        print("Player 1: select your name !")
+        for player in playerInGame {
+            if attackingPlayer.name != "" {
+                print("Player 2: select your name !")
+            }
+            if let userChoice = readLine() {
+                player.name = userChoice
+                print("You are now \(player.name)")
+            }
+        }
     }
     
     private func endGame() {
-        if attackingPlayer.team.count == 0 || opponnentPlayer.team.count == 0 {
             presentationStopOrRetry()
             stopOrRetry()
-        }
     }
 }

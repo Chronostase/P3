@@ -13,7 +13,7 @@ class Player { //Class who affect player
     //---------------------------//
     //MARK: - Properties
     //---------------------------//
-    
+    var name = ""
     var team: [Character] = []
     var selectedCharacter: Character?
     var targetCharacter: Character?
@@ -129,6 +129,7 @@ class Player { //Class who affect player
         for (index, character) in team.enumerated() {
             if character.life <= 0 {
                 team.remove(at: index)
+                print("Character's left: \(team.count)")
             }
         }
     }

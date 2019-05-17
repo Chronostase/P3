@@ -68,11 +68,14 @@ extension Game {
                 2. Heal !
                 """)
         } else {
-            print("""
-What do you want to do with  ?
-
-    1. Attack !
-""")
+            if let selectedCharacter = attackingPlayer.selectedCharacter {
+                
+                print("""
+                    What do you want to do with \(selectedCharacter.name) ?
+                    
+                    1. Attack !
+                    """)
+            }
         }
         
     }
