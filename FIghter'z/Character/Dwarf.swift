@@ -15,6 +15,6 @@ class Dwarf: Character { // class to create a dwarf
     //---------------------------//
     
     init() {
-        super.init(life: 80, attack: 6, sword: nil)
+        super.init(life: 80, attack: 6)
     }
 }
