@@ -15,6 +15,6 @@ class Colossus: Character { // class to create a colossus
     //---------------------------//
     
     init() {
-        super.init(life: 120, attack: 2, sword: nil)
+        super.init(life: 120, attack: 2)
     }
 }

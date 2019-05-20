@@ -91,9 +91,9 @@ class Game { // Setup and rules for the game
         case "2":
             if let character = attackingPlayer.selectedCharacter as? Wizard {
                 if let targetCharacter = attackingPlayer.targetCharacter {
-                    targetCharacter.life += character.heal
+                    targetCharacter.life += character.totalHeal
                     print("""
-                        You heal \(character.heal) point of life.
+                        You heal \(character.totalHeal) point of life.
                         And your target have \(targetCharacter.life) life left.
                         """)
                 }
@@ -132,13 +132,47 @@ class Game { // Setup and rules for the game
         //
         //        }
         if (attackingPlayer.selectedCharacter as? Wizard) != nil {
+            spawnChestGiveHealingWeapon()
             presentCharacterSelection(of: attackingPlayer, for: "target")
             attackingPlayer.selectTargetinTeam(of: attackingPlayer)
         } else {
+            spawnChestGiveAttackingWeapon()
             presentCharacterSelection(of: opponnentPlayer, for: "target :")
             attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
         }
         print("Exit of selectedchara/target")
+    }
+    
+    private func spawnChestGiveHealingWeapon() {
+        if let selectedCharacter = attackingPlayer.selectedCharacter as! Wizard? {
+            spawnChest()?.giveAHealingWeapon(to: selectedCharacter)
+            if let weapon = selectedCharacter.staf,
+                let name = weapon.name,
+                let heal = weapon.heal {
+                print("Amazing ! You find a chest and loot a great \(name) that heal \(heal) HP !")
+            }
+        }
+    }
+    
+    private func spawnChestGiveAttackingWeapon() {
+        if let selectedCharacter = attackingPlayer.selectedCharacter {
+            spawnChest()?.giveAttackingWeapon(to: selectedCharacter)
+            if let weapon = selectedCharacter.weapon,
+                let name = weapon.name,
+                let damage = weapon.damage {
+                print("Amazing ! You find a chest and loot a great \(name) that deal \(damage) damage !")
+            }
+        }
+    }
+    
+    private func spawnChest() -> Chest? {// Une chance sur deux
+        let index = Int.random(in: 0...1)
+        if index == 1 {
+            let chest = Chest()
+            
+            return chest
+        }
+        return nil
     }
     
     private func namePlayer() {

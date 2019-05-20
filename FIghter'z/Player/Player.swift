@@ -66,7 +66,7 @@ class Player { //Class who affect player
             if let userChoice = readLine() {
                 switch userChoice {
                 case "1":
-                    let fighter = Fighter()
+                    let fighter = Fighter(sword: AttackingWeapon())
                     addCharaInTeam(fighter)
                     rename(fighter)
                 case "2":
