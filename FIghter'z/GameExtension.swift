@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Game {
+extension Game { // Extension to stock all game print 
     
     func presentation() {
         print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")
@@ -80,9 +80,17 @@ extension Game {
         
     }
     
+    func winOrLoose() {
+        if playerInGame[0].team.count > 0 {
+            print("\(playerInGame[0].name) you are the Winner !")
+        }else if playerInGame[1].team.count > 0 {
+            print("\(playerInGame[1]) you are the Winner")
+        }
+    }
+    
     func presentationStopOrRetry() {
         print("""
-You loose your fight ! Maybe would you retry ?
+Maybe would you retry ?
 
     1. Yes ! I want to fight again !
 

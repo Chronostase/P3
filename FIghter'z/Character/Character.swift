@@ -17,11 +17,13 @@ class Character { // class to create characters
     var name = String()
     var life: Int
     var attack: Int
-    var sword: Sword?
+    var weapon: AttackingWeapon?
     var totalDamage: Int {
-        if let sword = sword {
-            let swordAndAttack = sword.damage + attack
-            return swordAndAttack
+        if let weapons = weapon,
+            let damage = weapons.damage {
+            let weaponAndAttack = (attack + damage)
+            
+            return weaponAndAttack
         }
         return attack
     }
@@ -30,10 +32,8 @@ class Character { // class to create characters
     //MARK: - Init
     //---------------------------//
     
-    init(life: Int, attack: Int, sword: Sword? = nil) {
+    init(life: Int, attack: Int) {
         self.life = life
         self.attack = attack
-        self.sword = sword
     }
-    
 }

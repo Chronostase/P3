@@ -13,13 +13,26 @@ class Player { //Class who affect player
     //---------------------------//
     //MARK: - Properties
     //---------------------------//
+    
     var name = ""
     var team: [Character] = []
     var selectedCharacter: Character?
     var targetCharacter: Character?
+    
     //---------------------------//
     //MARK: - Func
     //---------------------------//
+    
+    func attack(_ player: Player) {
+        if let selectedCharacter = player.selectedCharacter,
+            let targetCharacter = player.targetCharacter {
+            targetCharacter.life -= selectedCharacter.totalDamage
+            print("""
+                You inflicted \(selectedCharacter.totalDamage) damage.
+                And your \(targetCharacter.name) have \(targetCharacter.life) life left.
+                """)
+        }
+    }
     
     func selectACharater() {
         if let userChoice = readLine() {
@@ -66,7 +79,7 @@ class Player { //Class who affect player
             if let userChoice = readLine() {
                 switch userChoice {
                 case "1":
-                    let fighter = Fighter()
+                    let fighter = Fighter(sword: AttackingWeapon())
                     addCharaInTeam(fighter)
                     rename(fighter)
                 case "2":
@@ -85,6 +98,15 @@ class Player { //Class who affect player
                     print("Please select a correct number !")
                     createTeam()
                 }
+            }
+        }
+    }
+    
+    func checkIfDeadInTeam() {
+        for (index, character) in team.enumerated() {
+            if character.life <= 0 {
+                team.remove(at: index)
+                print("Character's left: \(team.count)")
             }
         }
     }
@@ -122,15 +144,5 @@ class Player { //Class who affect player
             }
         }
         return true
-    }
-    
-    
-    func checkIfDeadInTeam() {
-        for (index, character) in team.enumerated() {
-            if character.life <= 0 {
-                team.remove(at: index)
-                print("Character's left: \(team.count)")
-            }
-        }
     }
 }
