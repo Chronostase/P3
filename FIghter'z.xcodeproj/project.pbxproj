@@ -16,13 +16,8 @@
 		E975A9DD2271B65300AD79DE /* Colossus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975A9DC2271B65300AD79DE /* Colossus.swift */; };
 		E975A9E62271B71D00AD79DE /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975A9E52271B71D00AD79DE /* Chest.swift */; };
 		E975A9EA22721AE700AD79DE /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975A9E922721AE700AD79DE /* Player.swift */; };
-<<<<<<< HEAD
 		E989FA4D2295562300CBCAA7 /* attackingWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989FA4C2295562300CBCAA7 /* attackingWeapon.swift */; };
 		E989FA4F2295562F00CBCAA7 /* healingWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989FA4E2295562F00CBCAA7 /* healingWeapon.swift */; };
-=======
-		E989FA492292F78100CBCAA7 /* HealingWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989FA482292F78100CBCAA7 /* HealingWeapon.swift */; };
-		E989FA4B2292F7EB00CBCAA7 /* AttackingWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E989FA4A2292F7EB00CBCAA7 /* AttackingWeapon.swift */; };
->>>>>>> d51f8f21e4998fd8fc749ddb30d6dbc7bd25c6c9
 		E9AB92D9228C678D00C35695 /* GameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AB92D8228C678D00C35695 /* GameExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,13 +44,8 @@
 		E975A9DC2271B65300AD79DE /* Colossus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colossus.swift; sourceTree = "<group>"; };
 		E975A9E52271B71D00AD79DE /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		E975A9E922721AE700AD79DE /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		E989FA4C2295562300CBCAA7 /* attackingWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attackingWeapon.swift; sourceTree = "<group>"; };
 		E989FA4E2295562F00CBCAA7 /* healingWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = healingWeapon.swift; sourceTree = "<group>"; };
-=======
-		E989FA482292F78100CBCAA7 /* HealingWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealingWeapon.swift; sourceTree = "<group>"; };
-		E989FA4A2292F7EB00CBCAA7 /* AttackingWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackingWeapon.swift; sourceTree = "<group>"; };
->>>>>>> d51f8f21e4998fd8fc749ddb30d6dbc7bd25c6c9
 		E9AB92D8228C678D00C35695 /* GameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,13 +105,8 @@
 		E975A9DF2271B6AE00AD79DE /* Weapons */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				E989FA4C2295562300CBCAA7 /* attackingWeapon.swift */,
 				E989FA4E2295562F00CBCAA7 /* healingWeapon.swift */,
-=======
-				E989FA482292F78100CBCAA7 /* HealingWeapon.swift */,
-				E989FA4A2292F7EB00CBCAA7 /* AttackingWeapon.swift */,
->>>>>>> d51f8f21e4998fd8fc749ddb30d6dbc7bd25c6c9
 			);
 			path = Weapons;
 			sourceTree = "<group>";
@@ -204,17 +189,12 @@
 				E975A9D52271B63000AD79DE /* Character.swift in Sources */,
 				E9AB92D9228C678D00C35695 /* GameExtension.swift in Sources */,
 				E975A9D72271B63700AD79DE /* Fighter.swift in Sources */,
-				E989FA4B2292F7EB00CBCAA7 /* AttackingWeapon.swift in Sources */,
 				E975A9DB2271B64700AD79DE /* Dwarf.swift in Sources */,
 				E975A9DD2271B65300AD79DE /* Colossus.swift in Sources */,
 				E975A9CA2271B35600AD79DE /* main.swift in Sources */,
 				E975A9D92271B63E00AD79DE /* Wizard.swift in Sources */,
 				E989FA4D2295562300CBCAA7 /* attackingWeapon.swift in Sources */,
 				E975A9D22271B5D700AD79DE /* Game.swift in Sources */,
-<<<<<<< HEAD
-=======
-				E989FA492292F78100CBCAA7 /* HealingWeapon.swift in Sources */,
->>>>>>> d51f8f21e4998fd8fc749ddb30d6dbc7bd25c6c9
 				E975A9E62271B71D00AD79DE /* Chest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

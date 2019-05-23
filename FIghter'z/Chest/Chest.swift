@@ -11,7 +11,8 @@ import Foundation
 class Chest { // class to create a lootbox
     var attackingLootBox = AttackingWeapon()
     var healingLootBox = HealingWeapon()
-
+    
+    
     func giveAttackingWeapon(to character: Character) {
         attackingLootBox.giveName()
         attackingLootBox.giveDamage()

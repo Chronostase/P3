@@ -139,7 +139,7 @@ class Game { // Setup and rules for the game
     }
     
     private func spawnChestGiveHealingWeapon() {
-        if let selectedCharacter = attackingPlayer.selectedCharacter as! Wizard? {
+        if let selectedCharacter = attackingPlayer.selectedCharacter as? Wizard {
             spawnChest()?.giveAHealingWeapon(to: selectedCharacter)
             if let weapon = selectedCharacter.staf,
                 let name = weapon.name,
@@ -159,7 +159,7 @@ class Game { // Setup and rules for the game
             }
         }
     }
-    
+//    lazyvar
     private func spawnChest() -> Chest? {// Une chance sur deux
         let index = Int.random(in: 0...1)
         if index == 1 {

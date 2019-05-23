@@ -21,11 +21,7 @@ class Character { // class to create characters
     var totalDamage: Int {
         if let weapons = weapon,
             let damage = weapons.damage {
-<<<<<<< HEAD
             let weaponAndAttack = (attack + damage)
-=======
-           let weaponAndAttack = (attack + damage)
->>>>>>> d51f8f21e4998fd8fc749ddb30d6dbc7bd25c6c9
             
             return weaponAndAttack
         }

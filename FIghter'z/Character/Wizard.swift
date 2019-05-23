@@ -29,6 +29,7 @@ class Wizard: Character { // class to create a wizard
     //---------------------------//
     //MARK: - Init
     //---------------------------//
+    
     init(heal: Int) {
         self.heal = heal
         super.init(life: 80, attack: 0)
