@@ -67,8 +67,26 @@ extension Game {
                 
                 2. Heal !
                 """)
+        } else if let selectedCharacter = attackingPlayer.selectedCharacter as? Colossus {
+            if selectedCharacter.life <= 40 {
+                
+                print("""
+                What do you want to do with \(selectedCharacter.name) ?
+                
+                3. ColossusSlash !
+                """)
+                
+            } else {
+                print("""
+                What do you want to do with \(selectedCharacter.name) ?
+                
+                3. Attack Colossus !
+                """)
+            }
+            
         } else {
-            if let selectedCharacter = attackingPlayer.selectedCharacter {
+            
+         if let selectedCharacter = attackingPlayer.selectedCharacter {
                 
                 print("""
                     What do you want to do with \(selectedCharacter.name) ?
@@ -77,7 +95,6 @@ extension Game {
                     """)
             }
         }
-        
     }
     
     func presentationStopOrRetry() {

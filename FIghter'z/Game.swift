@@ -80,7 +80,7 @@ class Game { // Setup and rules for the game
                 targetCharacter.life -= selectedCharacter.totalDamage
                 print("""
                     You inflicted \(selectedCharacter.totalDamage) damage.
-                    And your \(targetCharacter.name) have \(targetCharacter.life) life left.
+                    And \(targetCharacter.name) have \(targetCharacter.life) life left.
                     """)
                 print("In team of attacking player.")
                 attackingPlayer.checkIfDeadInTeam()
@@ -94,8 +94,32 @@ class Game { // Setup and rules for the game
                     targetCharacter.life += character.totalHeal
                     print("""
                         You heal \(character.totalHeal) point of life.
-                        And your target have \(targetCharacter.life) life left.
+                        And \(targetCharacter.name) have \(targetCharacter.life) life left.
                         """)
+                }
+            }
+            
+        case "3":
+            if let character = attackingPlayer.selectedCharacter as? Colossus {
+                character.passiveSkillBerzerk()
+                
+                if character.checkColossusSlashAvailable() == true {
+                    character.colossusSlash(to: opponnentPlayer)
+                    
+                    for enemy in opponnentPlayer.team {
+                        print("You inflicted \(character.totalDamage) damage to \(enemy.name) and \(enemy.life) HP left")
+                    }
+                    
+                } else {
+                    
+                    if let targetCharacter = attackingPlayer.targetCharacter {
+                        targetCharacter.life -= character.totalDamage
+                        
+                        print("""
+                            You inflicted \(character.totalDamage) damage.
+                            And \(targetCharacter.name) have \(targetCharacter.life) life left.
+                            """)
+                    }
                 }
             }
             
@@ -128,17 +152,22 @@ class Game { // Setup and rules for the game
         resetCharacterAndTarget()
         presentCharacterSelection(of: attackingPlayer, for: "Character to do an action :")
         attackingPlayer.selectACharater()
-        //        if let _ = attackingPlayer.selectedCharacter as? Wizard {
-        //
-        //        }
+        
         if (attackingPlayer.selectedCharacter as? Wizard) != nil {
             spawnChestGiveHealingWeapon()
             presentCharacterSelection(of: attackingPlayer, for: "target")
             attackingPlayer.selectTargetinTeam(of: attackingPlayer)
+            
+        }  else if (attackingPlayer.selectedCharacter as? Colossus) != nil {
+            spawnChestGiveAttackingWeapon()
+            presentCharacterSelection(of: opponnentPlayer, for: "target :")
+            attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
+            
         } else {
             spawnChestGiveAttackingWeapon()
             presentCharacterSelection(of: opponnentPlayer, for: "target :")
             attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
+            
         }
         print("Exit of selectedchara/target")
     }
