@@ -70,61 +70,28 @@ class Game { // Setup and rules for the game
     
     private func actionInFight() {
         guard let userChoice = readLine() else {
-            
+            actionInFight()
             return print("Couldn't have information from readLine")
         }
         switch userChoice {
         case "1":
-            if let selectedCharacter = attackingPlayer.selectedCharacter,
-                let targetCharacter = attackingPlayer.targetCharacter {
-                targetCharacter.life -= selectedCharacter.totalDamage
-                print("""
-                    You inflicted \(selectedCharacter.totalDamage) damage.
-                    And \(targetCharacter.name) have \(targetCharacter.life) life left.
-                    """)
-                print("In team of attacking player.")
-                attackingPlayer.checkIfDeadInTeam()
-                print("In team of opponnent player.")
-                opponnentPlayer.checkIfDeadInTeam()
+            if attackingPlayer.selectedCharacter as? Colossus != nil {
+                attackingPlayer.setupColossusAttackAndAttack(against: opponnentPlayer)
+            } else {
+                attackingPlayer.setupAttackandAttack()
             }
+            
+            print("In team of attacking player.")
+            attackingPlayer.checkIfDeadInTeam()
+            print("In team of opponnent player.")
+            opponnentPlayer.checkIfDeadInTeam()
             
         case "2":
-            if let character = attackingPlayer.selectedCharacter as? Wizard {
-                if let targetCharacter = attackingPlayer.targetCharacter {
-                    targetCharacter.life += character.totalHeal
-                    print("""
-                        You heal \(character.totalHeal) point of life.
-                        And \(targetCharacter.name) have \(targetCharacter.life) life left.
-                        """)
-                }
-            }
-            
-        case "3":
-            if let character = attackingPlayer.selectedCharacter as? Colossus {
-                character.passiveSkillBerzerk()
-                
-                if character.checkColossusSlashAvailable() == true {
-                    character.colossusSlash(to: opponnentPlayer)
-                    
-                    for enemy in opponnentPlayer.team {
-                        print("You inflicted \(character.totalDamage) damage to \(enemy.name) and \(enemy.life) HP left")
-                    }
-                    
-                } else {
-                    
-                    if let targetCharacter = attackingPlayer.targetCharacter {
-                        targetCharacter.life -= character.totalDamage
-                        
-                        print("""
-                            You inflicted \(character.totalDamage) damage.
-                            And \(targetCharacter.name) have \(targetCharacter.life) life left.
-                            """)
-                    }
-                }
-            }
+            attackingPlayer.setupHealandHeal()
             
         default:
             print("Please select a correct number")
+            actionInFight()
         }
     }
     

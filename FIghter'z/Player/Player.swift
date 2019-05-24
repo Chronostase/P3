@@ -89,6 +89,53 @@ class Player { //Class who affect player
         }
     }
     
+    func setupAttackandAttack() {
+        if let selectedCharacter = selectedCharacter,
+            let targetCharacter = targetCharacter {
+            targetCharacter.life -= selectedCharacter.totalDamage
+            print("""
+                You inflicted \(selectedCharacter.totalDamage) damage.
+                And \(targetCharacter.name) have \(targetCharacter.life) life left.
+                """)
+        }
+    }
+    
+    func setupHealandHeal() {
+        if let character = selectedCharacter as? Wizard {
+            if let targetCharacter = targetCharacter {
+                targetCharacter.life += character.totalHeal
+                print("""
+                    You heal \(character.totalHeal) point of life.
+                    And \(targetCharacter.name) have \(targetCharacter.life) life left.
+                    """)
+            }
+        }
+    }
+    
+    func setupColossusAttackAndAttack(against player: Player) {
+        if let character = selectedCharacter as? Colossus {
+            character.passiveSkillBerzerk()
+            
+            if character.checkColossusSlashAvailable() == true {
+                character.colossusSlash(to: player)
+                
+                for enemy in player.team {
+                    print("You inflicted \(character.totalDamage) damage to \(enemy.name) and \(enemy.life) HP left")
+                }
+                
+            } else {
+                
+                if let targetCharacter = targetCharacter {
+                    targetCharacter.life -= character.totalDamage
+                    
+                    print("""
+                        You inflicted \(character.totalDamage) damage.
+                        And \(targetCharacter.name) have \(targetCharacter.life) life left.
+                        """)
+                }
+            }
+        }
+    }
     //---------------------------//
     //MARK: - Private Func
     //---------------------------//
