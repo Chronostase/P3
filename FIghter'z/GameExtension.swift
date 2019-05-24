@@ -52,7 +52,7 @@ extension Game { // Extension to stock all game print
     }
     
     func teamInformations() {
-        print(" The fight will begin ! In you team you have :")
+        print(" The fight will begin ! In your team you have :")
         printTeam(at: 0)
         
         print("In the ennemies team there is:")
@@ -67,8 +67,26 @@ extension Game { // Extension to stock all game print
                 
                 2. Heal !
                 """)
+        } else if let selectedCharacter = attackingPlayer.selectedCharacter as? Colossus {
+            if selectedCharacter.checkColossusSlashAvailable() == true {
+                
+                print("""
+                What do you want to do with \(selectedCharacter.name) ?
+                
+                1. ColossusSlash !
+                """)
+                
+            } else {
+                print("""
+                What do you want to do with \(selectedCharacter.name) ?
+                
+                1. Attack Colossus !
+                """)
+            }
+            
         } else {
-            if let selectedCharacter = attackingPlayer.selectedCharacter {
+            
+         if let selectedCharacter = attackingPlayer.selectedCharacter {
                 
                 print("""
                     What do you want to do with \(selectedCharacter.name) ?
@@ -77,7 +95,6 @@ extension Game { // Extension to stock all game print
                     """)
             }
         }
-        
     }
     
     func winOrLoose() {

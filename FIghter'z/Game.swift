@@ -70,31 +70,27 @@ class Game { // Setup and rules for the game
     
     private func actionInFight() {
         guard let userChoice = readLine() else {
-            
+            actionInFight()
             return print("Couldn't have information from readLine")
         }
         switch userChoice {
         case "1":
-            attackingPlayer.attack(attackingPlayer)
+            if attackingPlayer.selectedCharacter as? Colossus != nil {
+                attackingPlayer.setupColossusAttackAndAttack(against: opponnentPlayer)
+            } else {
+                attackingPlayer.setupAttackandAttack()
+            }
             
             print("In team of attacking player.")
             attackingPlayer.checkIfDeadInTeam()
             print("In team of opponnent player.")
             opponnentPlayer.checkIfDeadInTeam()
-        
         case "2":
-            if let character = attackingPlayer.selectedCharacter as? Wizard {
-                if let targetCharacter = attackingPlayer.targetCharacter {
-                    targetCharacter.life += character.totalHeal
-                    print("""
-                        You heal \(character.totalHeal) point of life.
-                        And your target have \(targetCharacter.life) life left.
-                        """)
-                }
-            }
+            attackingPlayer.setupHealandHeal()
             
         default:
             print("Please select a correct number")
+            actionInFight()
         }
     }
     
@@ -123,17 +119,22 @@ class Game { // Setup and rules for the game
         resetCharacterAndTarget()
         presentCharacterSelection(of: attackingPlayer, for: "Character to do an action :")
         attackingPlayer.selectACharater()
-        //        if let _ = attackingPlayer.selectedCharacter as? Wizard {
-        //
-        //        }
+        
         if (attackingPlayer.selectedCharacter as? Wizard) != nil {
             spawnChestGiveHealingWeapon()
             presentCharacterSelection(of: attackingPlayer, for: "target")
             attackingPlayer.selectTargetinTeam(of: attackingPlayer)
+            
+        }  else if (attackingPlayer.selectedCharacter as? Colossus) != nil {
+            spawnChestGiveAttackingWeapon()
+            presentCharacterSelection(of: opponnentPlayer, for: "target :")
+            attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
+            
         } else {
             spawnChestGiveAttackingWeapon()
             presentCharacterSelection(of: opponnentPlayer, for: "target :")
             attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
+            
         }
         print("Exit of selectedchara/target")
     }
