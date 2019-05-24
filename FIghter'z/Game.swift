@@ -113,7 +113,7 @@ class Game { // Setup and rules for the game
         playerInGame.append(attackingPlayer)
         playerInGame.append(opponnentPlayer)
     }
-
+    
     private func selectCharacterAndTarget() {
         print("Enter in selectedchara/target")
         resetCharacterAndTarget()
@@ -160,7 +160,7 @@ class Game { // Setup and rules for the game
             }
         }
     }
-//    lazyvar
+    //    lazyvar
     private func spawnChest() -> Chest? {// Une chance sur deux
         let index = Int.random(in: 0...1)
         if index == 1 {
