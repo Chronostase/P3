@@ -26,7 +26,7 @@ extension Game { // Extension to stock all game print
             
             3 Dwarf : A character who focused on attack with low life.
             
-            4 Colossus : A kind of armed tank
+            4 Colossus : A kind of armed tank with an intense rage.
             """)
     }
     
@@ -65,7 +65,7 @@ extension Game { // Extension to stock all game print
             print("""
                 What do you want to do with \(character.name) ?
                 
-                2. Heal !
+                1. Heal !
                 """)
         } else if let selectedCharacter = attackingPlayer.selectedCharacter as? Colossus {
             if selectedCharacter.checkColossusSlashAvailable() == true {

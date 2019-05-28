@@ -14,10 +14,15 @@ class Player { //Class who affect player
     //MARK: - Properties
     //---------------------------//
     
-    var name = ""
+    var name: String
     var team: [Character] = []
     var selectedCharacter: Character?
     var targetCharacter: Character?
+    
+    
+    init(name: String) {
+        self.name = name
+    }
     
     //---------------------------//
     //MARK: - Func

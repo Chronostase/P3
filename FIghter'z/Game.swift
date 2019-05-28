@@ -15,8 +15,8 @@ class Game { // Setup and rules for the game
     //---------------------------//
     
     var playerInGame: [Player] = []
-    var attackingPlayer = Player()
-    var opponnentPlayer = Player()
+    var attackingPlayer = Player(name: "Player 1")
+    var opponnentPlayer = Player(name: "Player 2")
     
     //---------------------------//
     //MARK: - Func
@@ -48,7 +48,7 @@ class Game { // Setup and rules for the game
     
     private func setup() {
         addPlayerInGame()
-        namePlayer()
+        giveNameToPlayer()
         presentation()
         attackingPlayer.createTeam()
         chooseCharacter(for: "ennemies team")
@@ -73,25 +73,25 @@ class Game { // Setup and rules for the game
             actionInFight()
             return print("Couldn't have information from readLine")
         }
-        switch userChoice {
-        case "1":
-            if attackingPlayer.selectedCharacter as? Colossus != nil {
-                attackingPlayer.setupColossusAttackAndAttack(against: opponnentPlayer)
-            } else {
-                attackingPlayer.setupAttackandAttack()
-            }
-            
-            print("In team of attacking player.")
-            attackingPlayer.checkIfDeadInTeam()
-            print("In team of opponnent player.")
-            opponnentPlayer.checkIfDeadInTeam()
-        case "2":
+        if userChoice == "1" {
+            doActionWithSelectedCharacter()
+        }
+    }
+    
+    private func doActionWithSelectedCharacter() { // Func to apply an action to selectedCharacter Heal/Attack
+        if attackingPlayer.selectedCharacter as? Wizard != nil {
             attackingPlayer.setupHealandHeal()
             
-        default:
-            print("Please select a correct number")
-            actionInFight()
+        } else if attackingPlayer.selectedCharacter as? Colossus != nil {
+            attackingPlayer.setupColossusAttackAndAttack(against: opponnentPlayer)
+            
+        } else {
+            attackingPlayer.setupAttackandAttack()
         }
+        print("In team of attacking player.")
+        attackingPlayer.checkIfDeadInTeam()
+        print("In team of opponnent player.")
+        opponnentPlayer.checkIfDeadInTeam()
     }
     
     
@@ -103,9 +103,11 @@ class Game { // Setup and rules for the game
     }
     
     private func resetTeam() {
+        var index = 1
         for player in playerInGame {
             player.team.removeAll()
-            player.name = ""
+            player.name = "Player \(index)"
+            index += 1
         }
     }
     
@@ -171,16 +173,29 @@ class Game { // Setup and rules for the game
         return nil
     }
     
-    private func namePlayer() {
-        print("Player 1: select your name !")
+//    private func namePlayer() {
+//        print("Player 1: select your name !")
+//        for player in playerInGame {
+//            if attackingPlayer.name != "" {
+//                print("Player 2: select your name !")
+//            }
+//            if let userChoice = readLine() {
+//                player.name = userChoice
+//                print("You are now \(player.name)")
+//            }
+//        }
+//    }
+    
+    private func giveNameToPlayer() {
         for player in playerInGame {
-            if attackingPlayer.name != "" {
-                print("Player 2: select your name !")
+            if player.name == "Player 1" || player.name == "Player 2" {
+                print("\(player.name), please select your name !")
+                if let userChoice = readLine() {
+                    player.name = userChoice
+                    print("Your are now \(player.name) !")
+                }
             }
-            if let userChoice = readLine() {
-                player.name = userChoice
-                print("You are now \(player.name)")
-            }
+            
         }
     }
     
