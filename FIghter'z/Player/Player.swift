@@ -27,7 +27,18 @@ class Player { //Class who affect player
     //---------------------------//
     //MARK: - Func
     //---------------------------//
-    
+
+    func rename(_ fighter: Character) {
+        print("Chose the name of your fighters")
+        if let name = readLine()?.lowercased() {
+            if bool == true && bool == true {
+                fighter.name = name
+                print("You choose \(fighter.name), select another number")
+            } else {
+                rename(fighter)
+            }
+        }
+    }
     func attack(_ player: Player) {
         if let selectedCharacter = player.selectedCharacter,
             let targetCharacter = player.targetCharacter {
@@ -79,39 +90,12 @@ class Player { //Class who affect player
         }
     }
     
-    func createTeam() {
-        while team.count < 3 {
-            if let userChoice = readLine() {
-                switch userChoice {
-                case "1":
-                    let fighter = Fighter(sword: AttackingWeapon())
-                    addCharaInTeam(fighter)
-                    rename(fighter)
-                case "2":
-                    let wizard = Wizard(heal: 5)
-                    addCharaInTeam(wizard)
-                    rename(wizard)
-                case "3":
-                    let dwarf = Dwarf()
-                    addCharaInTeam(dwarf)
-                    rename(dwarf)
-                case "4":
-                    let colossus = Colossus()
-                    addCharaInTeam(colossus)
-                    rename(colossus)
-                default:
-                    print("Please select a correct number !")
-                    createTeam()
-                }
-            }
-        }
-    }
-    
     func checkIfDeadInTeam() {
         for (index, character) in team.enumerated() {
         if character.life <= 0 {
-        team.remove(at: index)
-        print("Character's left: \(team.count)")
+            print("\(character.name) is dead ...")
+            team.remove(at: index)
+            print("Character's left: \(team.count)")
             }
         }
     }
@@ -163,11 +147,8 @@ class Player { //Class who affect player
             }
         }
     }
-    //---------------------------//
-    //MARK: - Private Func
-    //---------------------------//
     
-    private func addCharaInTeam(_ fighter: Character) {
+    func addCharaInTeam(_ fighter: Character) {
         if team.count < 3 {
             print("You add an ally")
             team.append(fighter)
@@ -175,26 +156,9 @@ class Player { //Class who affect player
             print("You team is full")
         }
     }
+    //---------------------------//
+    //MARK: - Private Func
+    //---------------------------//
     
-    private func rename(_ fighter: Character) {
-        print("Chose the name of your fighters")
-        if let name = readLine()?.lowercased() {
-            if nameIsDifferent(of: name) == true {
-                fighter.name = name
-                print("You choose \(fighter.name), select another number")
-            } else {
-                rename(fighter)
-            }
-        }
-    }
     
-    private func nameIsDifferent(of name: String) -> Bool {
-        for character in team {
-            if character.name == name {
-                print("You already have a character with this name choose another one.")
-                return false
-            }
-        }
-        return true
-    }
 }

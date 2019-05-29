@@ -50,12 +50,57 @@ class Game { // Setup and rules for the game
         addPlayerInGame()
         giveNameToPlayer()
         presentation()
-        attackingPlayer.createTeam()
+        createTeam(for: attackingPlayer)
         chooseCharacter(for: "ennemies team")
-        opponnentPlayer.createTeam()
+        createTeam(for: opponnentPlayer)
         teamInformations()
         fight()
     }
+    
+//    func createEachTeam() {
+//        while attackingPlayer.team.count != 3 && opponnentPlayer.team.count< != 3 {
+//            createTeam(for: attackingPlayer)
+//        }
+//    }
+    
+    func createTeam(for player: Player) {
+        while player.team.count < 3 {
+            if let userChoice = readLine() {
+                switch userChoice {
+                case "1":
+                    let fighter = Fighter(sword: AttackingWeapon())
+                    player.addCharaInTeam(fighter)
+                    player.rename(fighter)
+                case "2":
+                    let wizard = Wizard(heal: 5)
+                    player.addCharaInTeam(wizard)
+                    player.rename(wizard)
+                case "3":
+                    let dwarf = Dwarf()
+                    player.addCharaInTeam(dwarf)
+                    player.rename(dwarf)
+                case "4":
+                    let colossus = Colossus()
+                    player.addCharaInTeam(colossus)
+                    player.rename(colossus)
+                default:
+                    print("Please select a correct number !")
+                    createTeam(for: player)
+                }
+            }
+        }
+    }
+    
+    func check(_ name: String, in player: Player) -> Bool {
+        for character in player.team {
+            if character.name == name {
+                print("You already have a character with this name choose another one.")
+                return false
+            }
+        }
+        return true
+    }
+
     
     private func fight() {
         while attackingPlayer.team.count != 0 && opponnentPlayer.team.count != 0 {
@@ -173,29 +218,17 @@ class Game { // Setup and rules for the game
         return nil
     }
     
-//    private func namePlayer() {
-//        print("Player 1: select your name !")
-//        for player in playerInGame {
-//            if attackingPlayer.name != "" {
-//                print("Player 2: select your name !")
-//            }
-//            if let userChoice = readLine() {
-//                player.name = userChoice
-//                print("You are now \(player.name)")
-//            }
-//        }
-//    }
-    
     private func giveNameToPlayer() {
         for player in playerInGame {
+            
             if player.name == "Player 1" || player.name == "Player 2" {
                 print("\(player.name), please select your name !")
+                
                 if let userChoice = readLine() {
                     player.name = userChoice
                     print("Your are now \(player.name) !")
                 }
             }
-            
         }
     }
     
