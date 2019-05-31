@@ -27,18 +27,22 @@ class Player { //Class who affect player
     //---------------------------//
     //MARK: - Func
     //---------------------------//
-
-    func rename(_ fighter: Character) {
-        print("Chose the name of your fighters")
+    
+    func giveName(to fighter: Character, checkTeamOf firstPlayer: Player, _ secondPlayer: Player) {
+        print("Choose the name of your fighters")
         if let name = readLine()?.lowercased() {
-            if bool == true && bool == true {
+            if name.isAvailable(for: name, in: firstPlayer) == true && name.isAvailable(for: name, in: secondPlayer) == true {
+                
                 fighter.name = name
-                print("You choose \(fighter.name), select another number")
+                print("Your fighter is know called \(fighter.name)")
+                print("Select another number")
             } else {
-                rename(fighter)
+                giveName(to: fighter,checkTeamOf: firstPlayer, secondPlayer)
             }
         }
     }
+    
+
     func attack(_ player: Player) {
         if let selectedCharacter = player.selectedCharacter,
             let targetCharacter = player.targetCharacter {
@@ -92,10 +96,10 @@ class Player { //Class who affect player
     
     func checkIfDeadInTeam() {
         for (index, character) in team.enumerated() {
-        if character.life <= 0 {
-            print("\(character.name) is dead ...")
-            team.remove(at: index)
-            print("Character's left: \(team.count)")
+            if character.life <= 0 {
+                print("\(character.name) is dead ...")
+                team.remove(at: index)
+                print("Character's left: \(team.count)")
             }
         }
     }
@@ -122,7 +126,7 @@ class Player { //Class who affect player
             }
         }
     }
-
+    
     func setupColossusAttackAndAttack(against player: Player) {
         if let character = selectedCharacter as? Colossus {
             character.passiveSkillBerzerk()
@@ -134,16 +138,14 @@ class Player { //Class who affect player
                     print("You inflicted \(character.totalDamage) damage to \(enemy.name) and \(enemy.life) HP left")
                 }
                 
-            } else {
+            } else if let targetCharacter = targetCharacter {
                 
-                if let targetCharacter = targetCharacter {
-                    targetCharacter.life -= character.totalDamage
-                    
-                    print("""
-                        You inflicted \(character.totalDamage) damage.
-                        And \(targetCharacter.name) have \(targetCharacter.life) life left.
-                        """)
-                }
+                targetCharacter.life -= character.totalDamage
+                
+                print("""
+                    You inflicted \(character.totalDamage) damage.
+                    And \(targetCharacter.name) have \(targetCharacter.life) life left.
+                    """)
             }
         }
     }
@@ -156,9 +158,5 @@ class Player { //Class who affect player
             print("You team is full")
         }
     }
-    //---------------------------//
-    //MARK: - Private Func
-    //---------------------------//
-    
     
 }

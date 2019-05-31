@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Chest { // class to create a lootbox
+final class Chest { // class to create a lootbox
     var attackingLootBox = AttackingWeapon()
     var healingLootBox = HealingWeapon()
     

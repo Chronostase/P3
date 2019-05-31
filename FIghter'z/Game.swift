@@ -70,19 +70,19 @@ class Game { // Setup and rules for the game
                 case "1":
                     let fighter = Fighter(sword: AttackingWeapon())
                     player.addCharaInTeam(fighter)
-                    player.rename(fighter)
+                    player.giveName(to: fighter, checkTeamOf: attackingPlayer, opponnentPlayer)
                 case "2":
                     let wizard = Wizard(heal: 5)
                     player.addCharaInTeam(wizard)
-                    player.rename(wizard)
+                    player.giveName(to: wizard, checkTeamOf:  attackingPlayer, opponnentPlayer)
                 case "3":
                     let dwarf = Dwarf()
                     player.addCharaInTeam(dwarf)
-                    player.rename(dwarf)
+                    player.giveName(to: dwarf, checkTeamOf: attackingPlayer, opponnentPlayer)
                 case "4":
                     let colossus = Colossus()
                     player.addCharaInTeam(colossus)
-                    player.rename(colossus)
+                    player.giveName(to: colossus, checkTeamOf: attackingPlayer, opponnentPlayer)
                 default:
                     print("Please select a correct number !")
                     createTeam(for: player)
@@ -90,17 +90,6 @@ class Game { // Setup and rules for the game
             }
         }
     }
-    
-    func check(_ name: String, in player: Player) -> Bool {
-        for character in player.team {
-            if character.name == name {
-                print("You already have a character with this name choose another one.")
-                return false
-            }
-        }
-        return true
-    }
-
     
     private func fight() {
         while attackingPlayer.team.count != 0 && opponnentPlayer.team.count != 0 {
