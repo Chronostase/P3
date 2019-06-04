@@ -14,6 +14,6 @@ class AttackingWeapon: Weapon {
     
     override init() {
         super.init()
-        name = nameArray.randomElement()
+        name = nameArray.randomElement() // Select a random name 
     }
 }

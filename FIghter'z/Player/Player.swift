@@ -14,10 +14,10 @@ class Player { //Class who affect player
     //MARK: - Properties
     //---------------------------//
     
-    var name: String
-    var team: [Character] = []
-    var selectedCharacter: Character?
-    var targetCharacter: Character?
+    var name: String // Contain name of player
+    var team: [Character] = [] // Contain player's team
+    var selectedCharacter: Character? // Contain selected Character
+    var targetCharacter: Character? // Contain targeted Character 
     
     
     init(name: String) {
@@ -28,7 +28,7 @@ class Player { //Class who affect player
     //MARK: - Func
     //---------------------------//
     
-    func selectACharater() {
+    func selectACharater() { // Select character in player's own team
         if let userChoice = readLine() {
             switch userChoice {
             case "1":
@@ -44,7 +44,7 @@ class Player { //Class who affect player
         }
     }
     
-    func selectTargetinTeam(of player: Player) {
+    func selectTargetinTeam(of player: Player) { // Select a target in team of Player 1 or player 2
         if let userChoice = readLine() {
             switch userChoice {
             case "1":
@@ -68,7 +68,7 @@ class Player { //Class who affect player
         }
     }
     
-    func checkIfDeadInTeam() {
+    func checkIfDeadInTeam() { // Check if character is dead in team
         for (index, character) in team.enumerated() {
             if character.life <= 0 {
                 print("\(character.name) is dead ...")
@@ -78,7 +78,7 @@ class Player { //Class who affect player
         }
     }
     
-    func doAction(to: Player) {
+    func doAction(to player: Player) { // attack for specifical character
         if selectedCharacter as? Wizard != nil {
             setupHeal()
         }
@@ -89,7 +89,7 @@ class Player { //Class who affect player
         }
     }
     
-    private func setupAttack() {
+    private func setupAttack() { // Attack in fight
         if let selectedCharacter = selectedCharacter,
             let targetCharacter = targetCharacter {
             targetCharacter.life -= selectedCharacter.totalDamage
@@ -100,7 +100,7 @@ class Player { //Class who affect player
         }
     }
     
-    private func setupHeal() {
+    private func setupHeal() { // Heal in fight
         if let character = selectedCharacter as? Wizard {
             if let targetCharacter = targetCharacter {
                 targetCharacter.life += character.totalHeal
@@ -112,7 +112,7 @@ class Player { //Class who affect player
         }
     }
     
-    private func setupColossusAttack(against player: Player) {
+    private func setupColossusAttack(against player: Player) { // Attack or special attack
         if let character = selectedCharacter as? Colossus {
             character.passiveSkillBerzerk()
             
@@ -135,7 +135,7 @@ class Player { //Class who affect player
         }
     }
     
-    func addCharaInTeam(_ fighter: Character) {
+    func addCharaInTeam(_ fighter: Character) { // Add character in team
         if team.count < 3 {
             print("You add an ally")
             team.append(fighter)

@@ -10,12 +10,12 @@ import Foundation
 
 extension Game { // Extension to stock all game print 
     
-    func presentation() {
+    func presentation() { // Print to present the game
         print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")
         chooseCharacter(for: "your team")
     }
     
-    func chooseCharacter(for team: String) {
+    func chooseCharacter(for team: String) { // Presentation of character to add in team
         print("""
             Now you just have to add three characters in \(team) !
             Which character do you want to add ?
@@ -30,7 +30,7 @@ extension Game { // Extension to stock all game print
             """)
     }
     
-    func printTeam(at index: Int) {
+    func printTeam(at index: Int) { // Presentation of Player 1 or player 2 team
         for character in playerInGame[index].team {
             print("""
                 
@@ -40,18 +40,18 @@ extension Game { // Extension to stock all game print
         }
     }
     
-    func presentCharacterSelection(of player: Player, for string: String) {
+    func presentCharacterSelection(of player: Player, for string: String) { // Present character selection
         var index = 1
         print("Please select a \(string)")
         for character in player.team {
             print("""
-                \(index): \(character.name)
+                \(index): \(character.name) with attack: \(character.attack) life: \(character.life)
                 """)
             index += 1
         }
     }
     
-    func teamInformations() {
+    func teamInformations() { // Print information of each team
         print(" The fight will begin ! In your team you have :")
         printTeam(at: 0)
         
@@ -59,7 +59,7 @@ extension Game { // Extension to stock all game print
         printTeam(at: 1)
     }
     
-    func winOrLoose() {
+    func winOrLoose() { // Give the name of the winner
         if playerInGame[0].team.count > 0 {
             print("\(playerInGame[0].name) you are the Winner !")
         }else if playerInGame[1].team.count > 0 {
@@ -67,7 +67,7 @@ extension Game { // Extension to stock all game print
         }
     }
     
-    func presentationStopOrRetry() {
+    func presentationStopOrRetry() { // Print a choice to retry or quit 
         print("""
 Maybe would you retry ?
 

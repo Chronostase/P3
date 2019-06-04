@@ -10,38 +10,19 @@ import Foundation
 
 class Game { // Setup and rules for the game
     
-    //---------------------------//
     //MARK: - Properties
-    //---------------------------//
     
-    var playerInGame: [Player] = []
-    var attackingPlayer = Player(name: "Player 1")
-    var opponnentPlayer = Player(name: "Player 2")
+    var playerInGame: [Player] = [] // Contain each player
+    var attackingPlayer = Player(name: "Player 1") // contain player 1
+    var opponnentPlayer = Player(name: "Player 2") // contain player 2
     
-    //---------------------------//
     //MARK: - Main Func
-    //---------------------------//
     
-    func launchSoft() {
+    func launchSoft() { // Launch the setup of the game
         setup()
     }
     
-    func stopOrRetry() { // Give the choice to restart game or stop it
-        if let userchoice = readLine() {
-            switch userchoice {
-            case "1":
-                resetCharacterAndTarget()
-                resetTeam()
-                setup()
-            case "2":
-                print("Good bye !")
-            default:
-                print("Please select a correct number")
-            }
-        }
-    }
-    
-    private func setup() { // Launch all the func
+    private func setup() { // Launch the function to play to the game
         addPlayerInGame()
         giveNameToPlayer()
         presentation()
@@ -51,12 +32,8 @@ class Game { // Setup and rules for the game
         teamInformations()
         fight()
     }
-    
-    //---------------------------//
-    //MARK: - Private Func
-    //---------------------------//
 
-    private func createTeam(for player: Player) {
+    private func createTeam(for player: Player) { // Function to creat a team to each player
         while player.team.count < 3 {
             if let userChoice = readLine() {
                 switch userChoice {
@@ -84,9 +61,24 @@ class Game { // Setup and rules for the game
         }
     }
     
+    func stopOrRetry() { // Give the choice to restart game or stop it
+        if let userchoice = readLine() {
+            switch userchoice {
+            case "1":
+                resetCharacterAndTarget()
+                resetTeam()
+                setup()
+            case "2":
+                print("Good bye !")
+            default:
+                print("Please select a correct number")
+            }
+        }
+    }
+    
     //MARK: - Name settings
     
-    private func giveName(to fighter: Character) {
+    private func giveName(to fighter: Character) { // Give name to each character in player team
         print("Choose the name of your fighters")
         if let name = readLine()?.lowercased() {
             if isAvailable(name, in: attackingPlayer) == true && isAvailable(name, in: opponnentPlayer) == true {
@@ -100,7 +92,7 @@ class Game { // Setup and rules for the game
         }
     }
     
-    private func isAvailable(_ name: String, in player: Player) -> Bool {
+    private func isAvailable(_ name: String, in player: Player) -> Bool { // check if name is available
         for character in player.team {
             if character.name == name {
                 print("Someone already have a character with this name choose another one.")
@@ -110,7 +102,7 @@ class Game { // Setup and rules for the game
         return true
     }
     
-    private func giveNameToPlayer() {
+    private func giveNameToPlayer() { // Give a name to Player 1 and player 2
         for player in playerInGame {
             
             if player.name == "Player 1" || player.name == "Player 2" {
@@ -124,9 +116,14 @@ class Game { // Setup and rules for the game
         }
     }
     
+    private func addPlayerInGame() { // Add player in array to have easier access to print information
+        playerInGame.append(attackingPlayer)
+        playerInGame.append(opponnentPlayer)
+    }
+    
     //MARK: - Fight settings
     
-    private func fight() {
+    private func fight() { // Loop to execute the fight
         while attackingPlayer.team.count != 0 && opponnentPlayer.team.count != 0 {
             print("Enter in loop")
             selectCharacterAndTarget()
@@ -137,25 +134,19 @@ class Game { // Setup and rules for the game
         endGame()
     }
     
-    private func checkIfSomeoneDie() {
-        print("In team of attacking player.")
+    private func checkIfSomeoneDie() { // Check if character is dead
         attackingPlayer.checkIfDeadInTeam()
-        print("In team of opponnent player.")
         opponnentPlayer.checkIfDeadInTeam()
     }
-   
     
-    private func addPlayerInGame() {
-        playerInGame.append(attackingPlayer)
-        playerInGame.append(opponnentPlayer)
-    }
-    
-    private func selectCharacterAndTarget() {
-        print("Enter in selectedchara/target")
+    private func selectCharacterAndTarget() { // Select a character and a target to attackingPlayer
         resetCharacterAndTarget()
         presentCharacterSelection(of: attackingPlayer, for: "Character to do an action :")
         attackingPlayer.selectACharater()
-        
+        selectTarget()
+    }
+    
+    private func selectTarget() {
         if (attackingPlayer.selectedCharacter as? Wizard) != nil {
             spawnChestGiveHealingWeapon()
             presentCharacterSelection(of: attackingPlayer, for: "target")
@@ -170,14 +161,12 @@ class Game { // Setup and rules for the game
             spawnChestGiveAttackingWeapon()
             presentCharacterSelection(of: opponnentPlayer, for: "target :")
             attackingPlayer.selectTargetinTeam(of: opponnentPlayer)
-            
         }
-        print("Exit of selectedchara/target")
     }
     
     //MARK: - Chest settings
     
-    private func spawnChestGiveHealingWeapon() {
+    private func spawnChestGiveHealingWeapon() { // Spawn a chest to Wizard
         if let selectedCharacter = attackingPlayer.selectedCharacter as? Wizard {
             spawnChest()?.giveAHealingWeapon(to: selectedCharacter)
             if let weapon = selectedCharacter.weapon,
@@ -187,7 +176,7 @@ class Game { // Setup and rules for the game
         }
     }
     
-    private func spawnChestGiveAttackingWeapon() {
+    private func spawnChestGiveAttackingWeapon() { // Spawn chest to other character
         if let selectedCharacter = attackingPlayer.selectedCharacter {
             spawnChest()?.giveAttackingWeapon(to: selectedCharacter)
             if let weapon = selectedCharacter.weapon,
@@ -198,7 +187,7 @@ class Game { // Setup and rules for the game
     }
     
     private func spawnChest() -> Chest? {// 50% of spawn rate
-        let index = Int.random(in: 0...1)
+        let index = Int.random(in: 0...1) // Take a random index to creat spawn rate 
         if index == 1 {
             let chest = Chest()
             
@@ -209,14 +198,14 @@ class Game { // Setup and rules for the game
     
     //MARK: - End of game and reset settings
 
-    private func resetCharacterAndTarget() {
+    private func resetCharacterAndTarget() { // Func to reset selectedCharacter and targetCharacter
         for player in playerInGame {
             player.selectedCharacter = nil
             player.targetCharacter = nil
         }
     }
     
-    private func resetTeam() {
+    private func resetTeam() { // Func to clean team of player
         var index = 1
         for player in playerInGame {
             player.team.removeAll()
@@ -225,7 +214,7 @@ class Game { // Setup and rules for the game
         }
     }
     
-    private func endGame() {
+    private func endGame() { // Setup to end the game
         winOrLoose()
         presentationStopOrRetry()
         stopOrRetry()

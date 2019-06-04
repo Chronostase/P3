@@ -14,9 +14,9 @@ class Wizard: Character { // class to create a wizard
     //MARK: - Properties
     //---------------------------//
     
-    var heal: Int
-    var staff: HealingWeapon?
-    var totalHeal: Int {
+    var heal: Int // Contain Wizard's life
+    var staff: HealingWeapon? // Can contain a weapon
+    var totalHeal: Int { // Add weapon Int to heal
         if let weapons = staff {
             let weaponAndHeal = (self.heal + weapons.damage)
             

@@ -14,11 +14,11 @@ class Character { // class to create characters
     //MARK: - Properties
     //---------------------------//
     
-    var name = String()
-    var life: Int
-    var attack: Int
-    var weapon: AttackingWeapon?
-    var totalDamage: Int {
+    var name = String() // Contain Character's name
+    var life: Int // Contain Character's life
+    var attack: Int // Contain Character's attack
+    var weapon: AttackingWeapon? // Can contain a weapon
+    var totalDamage: Int { // Add weapon damage to attack 
         if let weapons = weapon {
             let weaponAndAttack = (self.attack + weapons.damage )
             

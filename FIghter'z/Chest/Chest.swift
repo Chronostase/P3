@@ -9,15 +9,15 @@
 import Foundation
 
 final class Chest { // class to create a lootbox
-    var attackingLootBox = AttackingWeapon()
-    var healingLootBox = HealingWeapon()
+    var attackingLootBox = AttackingWeapon() // Contain attacking Weapon
+    var healingLootBox = HealingWeapon() // Contain Healing Weapon
     
     
-    func giveAttackingWeapon(to character: Character) {
+    func giveAttackingWeapon(to character: Character) { // Give weapon only to other character
         character.weapon = attackingLootBox
     }
     
-    func giveAHealingWeapon(to character: Wizard) {
+    func giveAHealingWeapon(to character: Wizard) { // Give a weapon only to Wizard
         character.staff = healingLootBox
     }
 }

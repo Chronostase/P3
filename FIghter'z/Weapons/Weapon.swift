@@ -9,7 +9,7 @@
 import Foundation
 
 class Weapon {
-    var name: String?
-    var damage = Int.random(in: 10...16)
+    var name: String? // Contain weapon's name
+    var damage = Int.random(in: 10...16) // Contain random Int between 10 and 16 to give random damage
     
 }
