@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E917ADB022A167040063A899 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E917ADAF22A167040063A899 /* StringExtension.swift */; };
+		E917ADB322A674550063A899 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E917ADB222A674550063A899 /* Weapon.swift */; };
 		E975A9CA2271B35600AD79DE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975A9C92271B35600AD79DE /* main.swift */; };
 		E975A9D22271B5D700AD79DE /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975A9D12271B5D700AD79DE /* Game.swift */; };
 		E975A9D52271B63000AD79DE /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975A9D42271B63000AD79DE /* Character.swift */; };
@@ -35,7 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E917ADAF22A167040063A899 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		E917ADB222A674550063A899 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		E975A9C62271B35600AD79DE /* FIghter'z */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "FIghter'z"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E975A9C92271B35600AD79DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E975A9D12271B5D700AD79DE /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -65,7 +65,6 @@
 		E917ADB122A16E7E0063A899 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E917ADAF22A167040063A899 /* StringExtension.swift */,
 				E9AB92D8228C678D00C35695 /* GameExtension.swift */,
 			);
 			path = Extension;
@@ -116,6 +115,7 @@
 		E975A9DF2271B6AE00AD79DE /* Weapons */ = {
 			isa = PBXGroup;
 			children = (
+				E917ADB222A674550063A899 /* Weapon.swift */,
 				E989FA4C2295562300CBCAA7 /* AttackingWeapon.swift */,
 				E989FA4E2295562F00CBCAA7 /* HealingWeapon.swift */,
 			);
@@ -199,6 +199,7 @@
 				E975A9EA22721AE700AD79DE /* Player.swift in Sources */,
 				E975A9D52271B63000AD79DE /* Character.swift in Sources */,
 				E9AB92D9228C678D00C35695 /* GameExtension.swift in Sources */,
+				E917ADB322A674550063A899 /* Weapon.swift in Sources */,
 				E975A9D72271B63700AD79DE /* Fighter.swift in Sources */,
 				E975A9DB2271B64700AD79DE /* Dwarf.swift in Sources */,
 				E975A9DD2271B65300AD79DE /* Colossus.swift in Sources */,
@@ -206,7 +207,6 @@
 				E975A9D92271B63E00AD79DE /* Wizard.swift in Sources */,
 				E989FA4D2295562300CBCAA7 /* AttackingWeapon.swift in Sources */,
 				E975A9D22271B5D700AD79DE /* Game.swift in Sources */,
-				E917ADB022A167040063A899 /* StringExtension.swift in Sources */,
 				E975A9E62271B71D00AD79DE /* Chest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

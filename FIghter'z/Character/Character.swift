@@ -19,12 +19,11 @@ class Character { // class to create characters
     var attack: Int
     var weapon: AttackingWeapon?
     var totalDamage: Int {
-        if let weapons = weapon,
-            let damage = weapons.damage {
-            let weaponAndAttack = (attack + damage)
+        if let weapons = weapon {
+            let weaponAndAttack = (self.attack + weapons.damage )
             
             return weaponAndAttack
-        }
+            }
         return attack
     }
     

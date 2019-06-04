@@ -28,32 +28,6 @@ class Player { //Class who affect player
     //MARK: - Func
     //---------------------------//
     
-    func giveName(to fighter: Character, checkTeamOf firstPlayer: Player, _ secondPlayer: Player) {
-        print("Choose the name of your fighters")
-        if let name = readLine()?.lowercased() {
-            if name.isAvailable(for: name, in: firstPlayer) == true && name.isAvailable(for: name, in: secondPlayer) == true {
-                
-                fighter.name = name
-                print("Your fighter is know called \(fighter.name)")
-                print("Select another number")
-            } else {
-                giveName(to: fighter,checkTeamOf: firstPlayer, secondPlayer)
-            }
-        }
-    }
-    
-
-    func attack(_ player: Player) {
-        if let selectedCharacter = player.selectedCharacter,
-            let targetCharacter = player.targetCharacter {
-            targetCharacter.life -= selectedCharacter.totalDamage
-            print("""
-                You inflicted \(selectedCharacter.totalDamage) damage.
-                And your \(targetCharacter.name) have \(targetCharacter.life) life left.
-                """)
-        }
-    }
-    
     func selectACharater() {
         if let userChoice = readLine() {
             switch userChoice {
@@ -104,7 +78,18 @@ class Player { //Class who affect player
         }
     }
     
-    func setupAttackandAttack() {
+    func doAction(to: Player) {
+        if selectedCharacter as? Wizard != nil {
+            setupHeal()
+        }
+        if selectedCharacter as? Colossus != nil {
+            setupColossusAttack(against: player)
+        } else {
+            setupAttack()
+        }
+    }
+    
+    private func setupAttack() {
         if let selectedCharacter = selectedCharacter,
             let targetCharacter = targetCharacter {
             targetCharacter.life -= selectedCharacter.totalDamage
@@ -115,7 +100,7 @@ class Player { //Class who affect player
         }
     }
     
-    func setupHealandHeal() {
+    private func setupHeal() {
         if let character = selectedCharacter as? Wizard {
             if let targetCharacter = targetCharacter {
                 targetCharacter.life += character.totalHeal
@@ -127,7 +112,7 @@ class Player { //Class who affect player
         }
     }
     
-    func setupColossusAttackAndAttack(against player: Player) {
+    private func setupColossusAttack(against player: Player) {
         if let character = selectedCharacter as? Colossus {
             character.passiveSkillBerzerk()
             

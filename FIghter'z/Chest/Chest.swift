@@ -14,14 +14,10 @@ final class Chest { // class to create a lootbox
     
     
     func giveAttackingWeapon(to character: Character) {
-        attackingLootBox.giveName()
-        attackingLootBox.giveDamage()
         character.weapon = attackingLootBox
     }
     
     func giveAHealingWeapon(to character: Wizard) {
-        healingLootBox.giveName()
-        healingLootBox.giveHealAmount()
-        character.staf = healingLootBox
+        character.staff = healingLootBox
     }
 }

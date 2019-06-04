@@ -8,19 +8,12 @@
 
 import Foundation
 
-class AttackingWeapon {
-    var name: String?
-    var damage: Int?
+class AttackingWeapon: Weapon {
     
-    func giveDamage() {
-        var damageArray = [6,8,10,12,14]
-        let index = Int.random(in: 0...4)
-        damage = damageArray[index]
-    }
+    var nameArray = ["BF Razor","Ancient Sword","BroadSword of Azzinoth","Golem Gloves"]
     
-    func giveName() {
-        var nameArray = ["BF Razor","Ancient Sword","BroadSword of Azzinoth","Golem Gloves"]
-        let index = Int.random(in: 0...3)
-        name = nameArray[index]
+    override init() {
+        super.init()
+        name = nameArray.randomElement()
     }
 }

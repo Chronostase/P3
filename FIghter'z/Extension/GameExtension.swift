@@ -59,44 +59,6 @@ extension Game { // Extension to stock all game print
         printTeam(at: 1)
     }
     
-    func fightInterface() {
-        //FIXME: Changer le système de notation
-        if let character = attackingPlayer.selectedCharacter as? Wizard{
-            print("""
-                What do you want to do with \(character.name) ?
-                
-                1. Heal !
-                """)
-        } else if let selectedCharacter = attackingPlayer.selectedCharacter as? Colossus {
-            if selectedCharacter.checkColossusSlashAvailable() == true {
-                
-                print("""
-                What do you want to do with \(selectedCharacter.name) ?
-                
-                1. ColossusSlash !
-                """)
-                
-            } else {
-                print("""
-                What do you want to do with \(selectedCharacter.name) ?
-                
-                1. Attack Colossus !
-                """)
-            }
-            
-        } else {
-            
-         if let selectedCharacter = attackingPlayer.selectedCharacter {
-                
-                print("""
-                    What do you want to do with \(selectedCharacter.name) ?
-                    
-                    1. Attack !
-                    """)
-            }
-        }
-    }
-    
     func winOrLoose() {
         if playerInGame[0].team.count > 0 {
             print("\(playerInGame[0].name) you are the Winner !")

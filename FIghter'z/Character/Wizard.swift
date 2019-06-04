@@ -15,20 +15,17 @@ class Wizard: Character { // class to create a wizard
     //---------------------------//
     
     var heal: Int
-    var staf: HealingWeapon?
+    var staff: HealingWeapon?
     var totalHeal: Int {
-        if let weapons = staf,
-            let heal = weapons.heal {
-            let weaponAndHeal = (self.heal + heal)
+        if let weapons = staff {
+            let weaponAndHeal = (self.heal + weapons.damage)
             
             return weaponAndHeal
         }
         return heal
     }
     
-    //---------------------------//
     //MARK: - Init
-    //---------------------------//
     
     init(heal: Int) {
         self.heal = heal
