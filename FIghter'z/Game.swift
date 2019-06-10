@@ -61,21 +61,6 @@ class Game { // Setup and rules for the game
         }
     }
     
-    func stopOrRetry() { // Give the choice to restart game or stop it
-        if let userchoice = readLine() {
-            switch userchoice {
-            case "1":
-                resetCharacterAndTarget()
-                resetTeam()
-                setup()
-            case "2":
-                print("Good bye !")
-            default:
-                print("Please select a correct number")
-            }
-        }
-    }
-    
     //MARK: - Name settings
     
     private func giveName(to fighter: Character) { // Give name to each character in player team
@@ -186,8 +171,11 @@ class Game { // Setup and rules for the game
         }
     }
     
+    /// 50% spawn rate
+    ///
+    /// - Returns: new chest or nothing
     private func spawnChest() -> Chest? {// 50% of spawn rate
-        let index = Int.random(in: 0...1) // Take a random index to creat spawn rate 
+        let index = Int.random(in: 0...1) // Take a random index to creat spawn rate
         if index == 1 {
             let chest = Chest()
             
@@ -197,6 +185,21 @@ class Game { // Setup and rules for the game
     }
     
     //MARK: - End of game and reset settings
+    
+    func stopOrRetry() { // Give the choice to restart game or stop it
+        if let userchoice = readLine() {
+            switch userchoice {
+            case "1":
+                resetCharacterAndTarget()
+                resetTeam()
+                setup()
+            case "2":
+                print("Good bye !")
+            default:
+                print("Please select a correct number")
+            }
+        }
+    }
 
     private func resetCharacterAndTarget() { // Func to reset selectedCharacter and targetCharacter
         for player in playerInGame {

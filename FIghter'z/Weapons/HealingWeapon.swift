@@ -16,5 +16,4 @@ class HealingWeapon: Weapon {
         super.init()
         name = nameArray.randomElement() // Select a random name 
     }
-
 }

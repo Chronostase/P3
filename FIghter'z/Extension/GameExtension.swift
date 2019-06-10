@@ -62,7 +62,7 @@ extension Game { // Extension to stock all game print
     func winOrLoose() { // Give the name of the winner
         if playerInGame[0].team.count > 0 {
             print("\(playerInGame[0].name) you are the Winner !")
-        }else if playerInGame[1].team.count > 0 {
+        } else if playerInGame[1].team.count > 0 {
             print("\(playerInGame[1]) you are the Winner")
         }
     }

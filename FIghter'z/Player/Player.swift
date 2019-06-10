@@ -10,9 +10,7 @@ import Foundation
 
 class Player { //Class who affect player
     
-    //---------------------------//
     //MARK: - Properties
-    //---------------------------//
     
     var name: String // Contain name of player
     var team: [Character] = [] // Contain player's team
@@ -24,9 +22,7 @@ class Player { //Class who affect player
         self.name = name
     }
     
-    //---------------------------//
-    //MARK: - Func
-    //---------------------------//
+    //MARK: - Func to select character and character's target
     
     func selectACharater() { // Select character in player's own team
         if let userChoice = readLine() {
@@ -68,21 +64,23 @@ class Player { //Class who affect player
         }
     }
     
-    func checkIfDeadInTeam() { // Check if character is dead in team
-        for (index, character) in team.enumerated() {
-            if character.life <= 0 {
-                print("\(character.name) is dead ...")
-                team.remove(at: index)
-                print("Character's left: \(team.count)")
-            }
+    func addCharaInTeam(_ fighter: Character) { // Add character in team
+        if team.count < 3 {
+            print("You add an ally")
+            team.append(fighter)
+        } else {
+            print("You team is full")
         }
     }
+
     
+    //MARK: - Func to attack / Heal
+    
+
     func doAction(to player: Player) { // attack for specifical character
-        if selectedCharacter as? Wizard != nil {
+        if let _ = selectedCharacter as? Wizard {
             setupHeal()
-        }
-        if selectedCharacter as? Colossus != nil {
+        } else if let _ = selectedCharacter as? Colossus {
             setupColossusAttack(against: player)
         } else {
             setupAttack()
@@ -116,7 +114,7 @@ class Player { //Class who affect player
         if let character = selectedCharacter as? Colossus {
             character.passiveSkillBerzerk()
             
-            if character.checkColossusSlashAvailable() == true {
+            if character.ifColossusSlashIsAvailable() { // Change name
                 character.colossusSlash(to: player)
                 
                 for enemy in player.team {
@@ -135,12 +133,15 @@ class Player { //Class who affect player
         }
     }
     
-    func addCharaInTeam(_ fighter: Character) { // Add character in team
-        if team.count < 3 {
-            print("You add an ally")
-            team.append(fighter)
-        } else {
-            print("You team is full")
+    
+    
+    func checkIfDeadInTeam() { // Check if character is dead in team
+        for (index, character) in team.enumerated() {
+            if character.life <= 0 {
+                print("\(character.name) is dead ...")
+                team.remove(at: index)
+                print("Character's left: \(team.count)")
+            }
         }
     }
     
