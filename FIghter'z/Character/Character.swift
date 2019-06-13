@@ -9,7 +9,7 @@
 import Foundation
 
 class Character { // class to create characters
-  
+    
     //---------------------------//
     //MARK: - Properties
     //---------------------------//
@@ -23,7 +23,7 @@ class Character { // class to create characters
             let weaponAndAttack = (self.attack + weapons.damage )
             
             return weaponAndAttack
-            }
+        }
         return attack
     }
     

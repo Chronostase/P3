@@ -72,11 +72,9 @@ class Player { //Class who affect player
             print("You team is full")
         }
     }
-
     
     //MARK: - Func to attack / Heal
     
-
     func doAction(to player: Player) { // attack for specifical character
         if let _ = selectedCharacter as? Wizard {
             setupHeal()
@@ -120,7 +118,6 @@ class Player { //Class who affect player
                 for enemy in player.team {
                     print("You inflicted \(character.totalDamage) damage to \(enemy.name) and \(enemy.life) HP left")
                 }
-                
             } else if let targetCharacter = targetCharacter {
                 
                 targetCharacter.life -= character.totalDamage
@@ -132,8 +129,6 @@ class Player { //Class who affect player
             }
         }
     }
-    
-    
     
     func checkIfDeadInTeam() { // Check if character is dead in team
         for (index, character) in team.enumerated() {

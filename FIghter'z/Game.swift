@@ -32,7 +32,7 @@ class Game { // Setup and rules for the game
         teamInformations()
         fight()
     }
-
+    
     private func createTeam(for player: Player) { // Function to creat a team to each player
         while player.team.count < 3 {
             if let userChoice = readLine() {
@@ -67,7 +67,6 @@ class Game { // Setup and rules for the game
         print("Choose the name of your fighters")
         if let name = readLine()?.lowercased() {
             if isAvailable(name, in: attackingPlayer) == true && isAvailable(name, in: opponnentPlayer) == true {
-                
                 fighter.name = name
                 print("Your fighter is know called \(fighter.name)")
                 print("Select another number")
@@ -110,7 +109,6 @@ class Game { // Setup and rules for the game
     
     private func fight() { // Loop to execute the fight
         while attackingPlayer.team.count != 0 && opponnentPlayer.team.count != 0 {
-            print("Enter in loop")
             selectCharacterAndTarget()
             attackingPlayer.doAction(to: opponnentPlayer)
             checkIfSomeoneDie()
@@ -174,9 +172,8 @@ class Game { // Setup and rules for the game
     /// 50% spawn rate
     ///
     /// - Returns: new chest or nothing
-    private func spawnChest() -> Chest? {// 50% of spawn rate
-        let index = Int.random(in: 0...1) // Take a random index to creat spawn rate
-        if index == 1 {
+    private func spawnChest() -> Chest? {
+        if Int.random(in: 0...1) == 1 {
             let chest = Chest()
             
             return chest
@@ -200,7 +197,7 @@ class Game { // Setup and rules for the game
             }
         }
     }
-
+    
     private func resetCharacterAndTarget() { // Func to reset selectedCharacter and targetCharacter
         for player in playerInGame {
             player.selectedCharacter = nil
@@ -218,7 +215,7 @@ class Game { // Setup and rules for the game
     }
     
     private func endGame() { // Setup to end the game
-        winOrLoose()
+        presentWinner()
         presentationStopOrRetry()
         stopOrRetry()
     }
