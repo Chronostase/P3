@@ -33,7 +33,7 @@ class Game { // Setup and rules for the game
         fight()
     }
     
-    private func createTeam(for player: Player) { // Function to creat a team to each player
+    private func createTeam(for player: Player) { // Function to create a team to each player
         while player.team.count < 3 {
             if let userChoice = readLine() {
                 switch userChoice {
@@ -42,7 +42,7 @@ class Game { // Setup and rules for the game
                     player.addCharaInTeam(fighter)
                     giveName(to: fighter)
                 case "2":
-                    let wizard = Wizard(heal: 5)
+                    let wizard = Wizard(heal: 7)
                     player.addCharaInTeam(wizard)
                     giveName(to: wizard)
                 case "3":
@@ -100,7 +100,7 @@ class Game { // Setup and rules for the game
         }
     }
     
-    private func addPlayerInGame() { // Add player in array to have easier access to print information
+    private func addPlayerInGame() { // Add player in array to have easier access to information
         playerInGame.append(attackingPlayer)
         playerInGame.append(opponnentPlayer)
     }
@@ -111,16 +111,16 @@ class Game { // Setup and rules for the game
         while attackingPlayer.team.count != 0 && opponnentPlayer.team.count != 0 {
             selectCharacterAndTarget()
             attackingPlayer.doAction(to: opponnentPlayer)
-            checkIfSomeoneDie()
+            opponnentPlayer.checkIfDeadInTeam()
             swap(&attackingPlayer, &opponnentPlayer)
         }
         endGame()
     }
     
-    private func checkIfSomeoneDie() { // Check if character is dead
-        attackingPlayer.checkIfDeadInTeam()
-        opponnentPlayer.checkIfDeadInTeam()
-    }
+//    private func checkIfSomeoneDie() { // Check if character is dead
+////        attackingPlayer.checkIfDeadInTeam()
+//        opponnentPlayer.checkIfDeadInTeam()
+//    }
     
     private func selectCharacterAndTarget() { // Select a character and a target to attackingPlayer
         resetCharacterAndTarget()

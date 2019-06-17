@@ -112,7 +112,7 @@ class Player { //Class who affect player
         if let character = selectedCharacter as? Colossus {
             character.passiveSkillBerzerk()
             
-            if character.ifColossusSlashIsAvailable() { // Change name
+            if character.colossusSlashIsAvailable() { // Change name
                 character.colossusSlash(to: player)
                 
                 for enemy in player.team {
@@ -132,12 +132,27 @@ class Player { //Class who affect player
     
     func checkIfDeadInTeam() { // Check if character is dead in team
         for (index, character) in team.enumerated() {
-            if character.life <= 0 {
-                print("\(character.name) is dead ...")
+            if isDead(character) {
                 team.remove(at: index)
+                print("\(character.name) is dead ...")
                 print("Character's left: \(team.count)")
+
+                if team.count > 0 {
+                    checkIfDeadInTeam()
+                    
+                    return
+                }
             }
         }
+    }
+    
+    private func isDead(_ character: Character) -> Bool {
+        if character.life <= 0 {
+            
+            return true
+        }
+        
+        return false
     }
     
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Game { // Extension to stock all game print 
+extension Game { // Extension to stock all game's print
     
     func presentation() { // Print to present the game
         print("Welcome to Fighter'z, all you need to do is to select three fighters and go to the fight !")
@@ -34,7 +34,7 @@ extension Game { // Extension to stock all game print
         for character in playerInGame[index].team {
             print("""
                 
-                \(character.name): \(character.life) life and \(character.attack) attack
+                \(character.name): \(character.life) life and \(character.totalDamage) attack
                 
                 """)
         }
@@ -45,7 +45,7 @@ extension Game { // Extension to stock all game print
         print("Please select a \(string)")
         for character in player.team {
             print("""
-                \(index): \(character.name) with attack: \(character.attack) life: \(character.life)
+                \(index): \(character.name) with attack: \(character.totalDamage) life: \(character.life)
                 """)
             index += 1
         }

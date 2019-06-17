@@ -15,26 +15,26 @@ class Colossus: Character { // class to create a colossus
     //---------------------------//
     
     init() {
-        super.init(life: 120, attack: 2)
+        super.init(life: 20, attack: 80)
     }
     
     func passiveSkillBerzerk() { // Passive skill to increase damage when low on life
         if life <= 40 {
+            attack = 80
+            
+            print("Your attack reise to 14")
+        } else if life <= 80 {
             attack = 10
             
             print("Your attack reise to 10")
-        } else if life <= 80 {
-            attack = 6
-            
-            print("Your attack reise to 6")
         } else {
-            attack = 2
+            attack = 6
             
             print("You dont get any buf")
         }
     }
     
-    func ifColossusSlashIsAvailable() -> Bool { // Check if special capacity is available
+    func colossusSlashIsAvailable() -> Bool { // Check if special capacity is available
         if life <= 40 {
             return true
         }
@@ -42,7 +42,7 @@ class Colossus: Character { // class to create a colossus
     }
     
     func colossusSlash(to player: Player) { // Special attack that deal damage to all opponnent
-        if ifColossusSlashIsAvailable() == true {
+        if colossusSlashIsAvailable() == true {
             for character in player.team {
                 character.life -= totalDamage
             }
