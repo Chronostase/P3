@@ -117,11 +117,6 @@ class Game { // Setup and rules for the game
         endGame()
     }
     
-//    private func checkIfSomeoneDie() { // Check if character is dead
-////        attackingPlayer.checkIfDeadInTeam()
-//        opponnentPlayer.checkIfDeadInTeam()
-//    }
-    
     private func selectCharacterAndTarget() { // Select a character and a target to attackingPlayer
         resetCharacterAndTarget()
         presentCharacterSelection(of: attackingPlayer, for: "Character to do an action :")

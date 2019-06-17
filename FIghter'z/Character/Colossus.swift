@@ -15,18 +15,18 @@ class Colossus: Character { // class to create a colossus
     //---------------------------//
     
     init() {
-        super.init(life: 20, attack: 80)
+        super.init(life: 20, attack: 6)
     }
     
     func passiveSkillBerzerk() { // Passive skill to increase damage when low on life
         if life <= 40 {
-            attack = 80
+            attack = 14
             
-            print("Your attack reise to 14")
+            print("Your attack raise to 14")
         } else if life <= 80 {
             attack = 10
             
-            print("Your attack reise to 10")
+            print("Your attack raise to 10")
         } else {
             attack = 6
             
