@@ -13,6 +13,6 @@ class Dwarf: Character { // class to create a dwarf
     //MARK: - Init
     
     init() {
-        super.init(life: 80, attack: 12)
+        super.init(life: 40, attack: 12)
     }
 }

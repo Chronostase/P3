@@ -15,7 +15,7 @@ class Colossus: Character { // class to create a colossus
     //---------------------------//
     
     init() {
-        super.init(life: 20, attack: 6)
+        super.init(life: 40, attack: 6)
     }
     
     func passiveSkillBerzerk() { // Passive skill to increase damage when low on life
